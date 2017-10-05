@@ -1,0 +1,126 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+/* 组件 */
+#com{
+	display:none;
+	position:fixed;
+	top:0;
+	left:0;
+	z-index:1;
+	opacity:0;
+	/*background:#000;*/
+}
+
+/* 背景 */
+#com .bg{
+	width:100%;
+	height:100%;
+	position:absolute;
+	opacity:.3;
+	background:#000;
+}
+
+/****** 登录组件 ******/
+#com .login{
+	width:385px;
+	height:auto;
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin:-160px 0 0 -215px;
+	border-radius:2px;
+	overflow:hidden;
+	/*background:#FFF;*/
+}
+
+/* 标题 */
+#com .login .title-bar{
+	height:38px;
+	font-size:0;
+	padding:15px 0 0 0;
+	background:#009966;
+}
+
+/* 登录注册 */
+#com .login .title-bar a{
+	display:inline-block;
+	height:35px;
+	line-height:35px;
+	font-size:16px;
+	position:relative;
+	left:50px;
+	padding:0 15px;
+	border-bottom:3px solid #009966;
+}
+
+/* 登录标题 */
+#com .login .title-bar .a-login{
+	color:#FFF;
+	border-bottom-color:#F60;
+}
+
+/* 注册标题 */
+#com .login .title-bar .a-register{
+	color:#FFF;
+}
+
+/* 控件容器 */
+#com .main-container{
+	padding:20px 50px 30px 50px;
+	background:#FFF;
+}
+
+/* 控件列表 */
+#com ul{
+	/*position:relative;
+	top:15px;
+	left:50px;*/
+	/*background:#963;*/
+}
+
+/* 控件列表项 */
+#com ul li{
+	margin:0 0 8px 0;
+	/*background:#06F;*/
+}
+
+/* 提示内容 */
+#com ul li .hint{
+	color:#009966;
+	font-size:12px;
+}
+
+/* 输入框 */
+#com ul li input{
+	width:260px;
+	height:30px;
+	outline:none;
+	padding:0 10px;
+}
+
+/* 按钮 */
+#com ul li button{
+	width:284px;
+	height:38px;
+	color:#FFF;
+	border:none;
+	outline:none;
+	border-radius:2px;
+	cursor:pointer;
+	background:#F60;
+}
+
+#com ul li button:hover{
+	background:#F06200;
+}
+
+/* 登录 */
+#com .login-container{
+	display:block;
+}
+
+/* 注册 */
+#com .reg-container{
+	display:none;
+}

@@ -1,0 +1,242 @@
+﻿<!doctype html>
+<html>
+<head>
+<title>Zero - 搜索页</title>
+<meta charset="utf-8" />
+<link type="text/css" rel="stylesheet" href="../css/style.css" /><!-- 公共样式库 -->
+<link type="text/css" rel="stylesheet" href="../css/ui.css" /><!-- 组件样式库 -->
+<script type="text/javascript" src="../js/jquery-1.8.0.min.js"></script><!-- jQuery 核心库 -->
+<script type="text/javascript" src="../js/jquery.animate-shadow.js"></script><!-- jQuery 阴影动画插件 -->
+<script type="text/javascript" src="../js/UI.js"></script>
+<script type="text/javascript" src="../js/Effect.js"></script>
+<script type="text/javascript">
+<!--
+	var eft = new Effect();
+	
+	//DOM载入
+	$(function(){
+		eft.comAuto();//组件自适应窗口
+		eft.authCom();//认证组件
+		eft.searchPageSelector();//搜索页选项卡切换
+	})
+	
+	//窗口大小重置
+	$(window).resize(function(e) {
+        eft.comAuto();//组件自适应窗口
+    });
+	
+	//滚动条运动
+	$(window).scroll(function(e) {
+		eft.navShadow();//导航栏阴影
+    });
+//-->
+</script>
+</head>
+
+<body>
+	<!-- 导航 -->
+    <div id="nav">
+    	<!-- 导航栏 -->
+    	<div class="nav-bar">
+        	<!-- LOGO -->
+        	<div class="logo-container">
+            	<img src="../images/logo.png" />
+            </div>
+            <!-- 搜索 -->
+            <div class="search-container">
+            	<form onSubmit="return false;">
+                	<input type="text" />
+                    <button></button>
+                </form>
+            </div>
+            <!-- 用户状态 -->
+            <div class="user-status-container">
+            	<!-- 未登录 -->
+            	<div class="logout" style="display:none0;">
+                    <a id="a-login-menu" href="">登录</a>
+                    <a id="a-reg-menu" href="">注册</a>
+                </div>
+                
+                <!-- 已登录 -->
+                <div class="logined" style="display:none;">
+                	<a href="" class="a-link notice">&nbsp;</a>
+                    <a href="" class="person a-link">个人中心</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 主体 -->
+    <div id="search-main">
+    	<!-- 搜索容器 -->
+        <div class="search-container">
+        	<!-- 标题栏 -->
+            <div class="title-bar">
+            	<span class="selector all">全部</span>
+                <span class="selector solved">已解决</span>
+                <span class="selector unsolved">待解决</span>
+                <span class="result-show">找到约&nbsp;<strong>60</strong>&nbsp;条结果</span>
+            </div>
+            
+            <!-- 内容容器 -->
+            <div class="content-container">
+            	<ul>
+                	<li>
+                    	<!-- 标题 -->
+                        <a href=""><span class="title">PHP LAMP环境搭建</span></a>
+                        <!-- 发布时间 -->
+                        <span class="pub-date">2017-9-27&nbsp;&nbsp;22:21</span>
+                        <!-- 内容 -->
+                        <div class="content-box">
+                        	<!-- 描述 -->
+                            <span class="desc">1、安装Apache [root@localhost ~]# yum -y install httpd # 开机自启动 [root@localhost ~]#             					  chkconfig httpd on # 启动httpd 服务 [root@localhost ~]# service httpd start 
+                                  ### 安装apache 一些扩展1、安装Apache [root@localhost ~]# yum -y install httpd ...
+                            </span>
+                        </div>
+                    </li>
+                    <li>
+                    	<!-- 标题 -->
+                        <a href=""><span class="title">PHP LAMP环境搭建</span></a>
+                        <!-- 发布时间 -->
+                        <span class="pub-date">2017-9-27&nbsp;&nbsp;22:21</span>
+                        <!-- 内容 -->
+                        <div class="content-box">
+                        	<!-- 描述 -->
+                            <span class="desc">1、安装Apache [root@localhost ~]# yum -y install httpd # 开机自启动 [root@localhost ~]#             					  chkconfig httpd on # 启动httpd 服务 [root@localhost ~]# service httpd start 
+                                  ### 安装apache 一些扩展1、安装Apache [root@localhost ~]# yum -y install httpd ...
+                            </span>
+                        </div>
+                    </li>
+                    <li>
+                    	<!-- 标题 -->
+                        <a href=""><span class="title">PHP LAMP环境搭建</span></a>
+                        <!-- 发布时间 -->
+                        <span class="pub-date">2017-9-27&nbsp;&nbsp;22:21</span>
+                        <!-- 内容 -->
+                        <div class="content-box">
+                        	<!-- 描述 -->
+                            <span class="desc">1、安装Apache [root@localhost ~]# yum -y install httpd # 开机自启动 [root@localhost ~]#             					  chkconfig httpd on # 启动httpd 服务 [root@localhost ~]# service httpd start 
+                                  ### 安装apache 一些扩展1、安装Apache [root@localhost ~]# yum -y install httpd ...
+                            </span>
+                        </div>
+                    </li>
+                    <li>
+                    	<!-- 标题 -->
+                        <a href=""><span class="title">PHP LAMP环境搭建</span></a>
+                        <!-- 发布时间 -->
+                        <span class="pub-date">2017-9-27&nbsp;&nbsp;22:21</span>
+                        <!-- 内容 -->
+                        <div class="content-box">
+                        	<!-- 描述 -->
+                            <span class="desc">1、安装Apache [root@localhost ~]# yum -y install httpd # 开机自启动 [root@localhost ~]#             					  chkconfig httpd on # 启动httpd 服务 [root@localhost ~]# service httpd start 
+                                  ### 安装apache 一些扩展1、安装Apache [root@localhost ~]# yum -y install httpd ...
+                            </span>
+                        </div>
+                    </li>
+                    <li>
+                    	<!-- 标题 -->
+                        <a href=""><span class="title">PHP LAMP环境搭建</span></a>
+                        <!-- 发布时间 -->
+                        <span class="pub-date">2017-9-27&nbsp;&nbsp;22:21</span>
+                        <!-- 内容 -->
+                        <div class="content-box">
+                        	<!-- 描述 -->
+                            <span class="desc">1、安装Apache [root@localhost ~]# yum -y install httpd # 开机自启动 [root@localhost ~]#             					  chkconfig httpd on # 启动httpd 服务 [root@localhost ~]# service httpd start 
+                                  ### 安装apache 一些扩展1、安装Apache [root@localhost ~]# yum -y install httpd ...
+                            </span>
+                        </div>
+                    </li>
+                    <li>
+                    	<!-- 标题 -->
+                        <a href=""><span class="title">PHP LAMP环境搭建</span></a>
+                        <!-- 发布时间 -->
+                        <span class="pub-date">2017-9-27&nbsp;&nbsp;22:21</span>
+                        <!-- 内容 -->
+                        <div class="content-box">
+                        	<!-- 描述 -->
+                            <span class="desc">1、安装Apache [root@localhost ~]# yum -y install httpd # 开机自启动 [root@localhost ~]#             					  chkconfig httpd on # 启动httpd 服务 [root@localhost ~]# service httpd start 
+                                  ### 安装apache 一些扩展1、安装Apache [root@localhost ~]# yum -y install httpd ...
+                            </span>
+                        </div>
+                    </li>
+                    <li>
+                    	<!-- 标题 -->
+                        <a href=""><span class="title">PHP LAMP环境搭建</span></a>
+                        <!-- 发布时间 -->
+                        <span class="pub-date">2017-9-27&nbsp;&nbsp;22:21</span>
+                        <!-- 内容 -->
+                        <div class="content-box">
+                        	<!-- 描述 -->
+                            <span class="desc">1、安装Apache [root@localhost ~]# yum -y install httpd # 开机自启动 [root@localhost ~]#             					  chkconfig httpd on # 启动httpd 服务 [root@localhost ~]# service httpd start 
+                                  ### 安装apache 一些扩展1、安装Apache [root@localhost ~]# yum -y install httpd ...
+                            </span>
+                        </div>
+                    </li>
+                    <li>
+                    	<!-- 标题 -->
+                        <a href=""><span class="title">PHP LAMP环境搭建</span></a>
+                        <!-- 发布时间 -->
+                        <span class="pub-date">2017-9-27&nbsp;&nbsp;22:21</span>
+                        <!-- 内容 -->
+                        <div class="content-box">
+                        	<!-- 描述 -->
+                            <span class="desc">1、安装Apache [root@localhost ~]# yum -y install httpd # 开机自启动 [root@localhost ~]#             					  chkconfig httpd on # 启动httpd 服务 [root@localhost ~]# service httpd start 
+                                  ### 安装apache 一些扩展1、安装Apache [root@localhost ~]# yum -y install httpd ...
+                            </span>
+                        </div>
+                    </li>
+                </ul>
+                <!-- 加载更多 -->
+                <p class="load-more"><a href="">加载更多</a></p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <div id="footer">
+    	<!-- 居中容器 -->
+    	<div class="center-container">
+        	<p class="intro">Zero - 一个零距离问答互动平台</p>
+            <p class="copyright">Copyright @ 2017 By Zero.</p>
+        </div>
+    </div>
+    
+    <!-- 组件 -->
+    <div id="com">
+    	<!-- 背景 -->
+        <div class="bg">
+        </div>
+    
+    	<!-- 登录/注册组件 -->
+        <div class="login">
+        	<!-- 标题栏 -->
+            <div class="title-bar">
+            	<a id="a-login-selection" class="a-login" href="" >登录</a>
+                <a id="a-reg-selection" class="a-register" href="">注册</a>
+            </div>
+            
+            <!-- 登录控件容器 -->
+            <div id="login-container" class="login-container main-container">
+            	<ul>
+                	<li><span class="hint">请填写信息</span></li>
+                	<li><input type="text" placeholder="用户名" /></li>
+                    <li><input type="password" placeholder="密码" /></li>
+                    <li><button>登&nbsp;&nbsp;&nbsp;&nbsp;录</button></li>
+                </ul>
+            </div>
+            
+            <!-- 注册控件容器 -->
+            <div id="reg-container" class="reg-container main-container">
+            	<ul>
+                	<li><span class="hint">请填写信息</span></li>
+                	<li><input type="text" placeholder="用户名" /></li>
+                    <li><input type="text" placeholder="昵称" /></li>
+                    <li><input type="password" placeholder="密码" /></li>
+                    <li><input type="password" placeholder="重复密码" /></li>
+                    <li><button>注&nbsp;&nbsp;&nbsp;&nbsp;册</button></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
