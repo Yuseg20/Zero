@@ -1,0 +1,254 @@
+﻿<!doctype html>
+<html>
+<head>
+<title>Zero - 内容页</title>
+<meta charset="utf-8" />
+<link type="text/css" rel="stylesheet" href="../src/css/style.css" /><!-- 公共样式库 -->
+<link type="text/css" rel="stylesheet" href="../src/css/ui.css" /><!-- 组件样式库 -->
+<script type="text/javascript" src="../src/js/jquery-1.8.0.min.js"></script><!-- jQuery 核心库 -->
+<script type="text/javascript" src="../src/js/jquery.animate-shadow.js"></script><!-- jQuery 阴影动画插件 -->
+<script type="text/javascript" src="../src/js/UI.js"></script>
+<script type="text/javascript" src="../src/js/Effect.js"></script>
+<script type="text/javascript" src="../plugin/ueditor/ueditor.config.js"></script><!-- UEditor 配置 -->
+<script type="text/javascript" src="../plugin/ueditor/ueditor.all.min.js"></script><!-- UEditor 核心 -->
+<script type="text/javascript">
+<!--
+	var eft = new Effect();
+	
+	//DOM载入
+	$(function(){
+		eft.comAuto();//组建自适应窗口
+		eft.authCom();//认证组件
+		eft.articlePageEdit();//内容页编辑器
+	})
+	
+	//窗口大小重置
+	$(window).resize(function(e) {
+        eft.comAuto();//组件自适应窗口
+    });
+	
+	//滚动条运动
+	$(window).scroll(function(e) {
+		eft.navShadow();//导航栏阴影
+    });
+//-->
+</script>
+</head>
+
+<body>
+	<!-- 导航 -->
+    <div id="nav">
+    	<!-- 导航栏 -->
+    	<div class="nav-bar">
+        	<!-- LOGO -->
+        	<div class="logo-container">
+            	<img src="../src/images/logo.png" />
+            </div>
+            <!-- 搜索 -->
+            <div class="search-container">
+            	<form onSubmit="return false;">
+                	<input type="text" />
+                    <button></button>
+                </form>
+            </div>
+            <!-- 用户状态 -->
+            <div class="user-status-container">
+            	<!-- 未登录 -->
+            	<div class="logout" style="display:none0;">
+                    <a id="a-login-menu" href="">登录</a>
+                    <a id="a-reg-menu" href="">注册</a>
+                </div>
+                
+                <!-- 已登录 -->
+                <div class="logined" style="display:none;">
+                	<a href="" class="a-link notice">&nbsp;</a>
+                    <a href="" class="person a-link">个人中心</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 主体 -->
+    <div id="article-main">
+        <!-- 容器1 -->
+        <div class="container-1">
+        	<!-- 左侧 -->
+            <div class="left">
+            	<!-- 提问信息 -->
+            	<div class="question">
+                	<!-- 标题 -->
+                    <h2 class="title">电脑黑屏，进不去系统怎么办？</h2>
+                    <!-- 描述 -->
+                    <p class="desc">一开始在上网后来就电脑死机了无法正常关闭，就把机箱电源给拔了，然后再开机就黑屏了无法开机，机箱在运转，检查显示器连线都正常，自动更新程序一直在禁用，在光驱中放入安装盘无法显示。请问怎么办？给出出招啊一开始在上网后来就电脑死机了无法正常关闭，就把机箱电源给拔了，然后再开机就黑屏了无法开机，机箱在运转，检查显示器连线都正常，自动更新程序一直在禁用，在光驱中放入安装盘无法显示。请问怎么办？给出出招啊一开始在上网后来就电脑死机了无法正常关闭，就把机箱电源给拔了，然后再开机就黑屏了无法开机，机箱在运转，检查显示器连线都正常，自动更新程序一直在禁用，在光驱中放入安装盘无法显示。请问怎么办？给出出招啊一开始在上网后来就电脑死机了无法正常关闭，就把机箱电源给拔了，然后再开机就黑屏了无法开机，机箱在运转，检查显示器连线都正常，自动更新程序一直在禁用，在光驱中放入安装盘无法显示。请问怎么办？给出出招啊一开始在上网后来就电脑死机了无法正常关闭，就把机箱电源给拔了，然后再开机就黑屏了无法开机，机箱在运转，检查显示器连线都正常，自动更新程序一直在禁用，在光驱中放入安装盘无法显示。请问怎么办？给出出招啊一开始在上</p>
+                    <span class="pub-time">发布时间&nbsp;2017-10-2 11:15</span>&nbsp;&nbsp;
+                    <span class="read">浏览&nbsp;36</span>
+                </div>
+                <!-- 回答信息 -->
+            	<div class="answer">
+                	<!-- 标题 -->
+                    <h3 class="title">回答</h3>
+                    <!-- 回答列表 -->
+                    <ul>
+                    	<li>
+                        	<!-- 回答者信息 -->
+                            <div class="answer-info">
+                            	<img class="avatar" src="../src/images/avatar.jpg" />
+                                <span class="nickname">逍遥生</span>
+                                <span class="pub-time">2017-10-2 14:08</span>
+                            </div>
+                            <!-- 回答内容 -->
+                            <div class="answer-content">然后再开机就黑屏了无法开机，机箱在运转，检查显示器连线都正常，自动更新程序一直在禁用，在光驱中放入安装盘无法显示。请问怎么办？给出出招啊一开始在上网后来就电脑死机了无法正常关闭，就把机箱电源给拔了，然后再开机就黑屏了无法开机，机箱在运转，检查显示器连线都正常，自动更新程序一直在禁用，在光驱中放入安装盘无法显示。请问怎么办？给出出招啊一开始在上网后来就电脑死机了无法正常关闭，就把机箱电源给拔了，然后再开机</div>
+                            <!-- 回答评价 -->
+                            <div class="answer-estimate">
+                            	<span class="support"><a href="">支持</a>&nbsp;(0)</span>&nbsp;&nbsp;
+                                <span class="oppose"><a href="">反对</a>&nbsp;(0)</span>
+                            </div>
+                        </li>
+                        <li>
+                        	<!-- 回答者信息 -->
+                            <div class="answer-info">
+                            	<img class="avatar" src="../src/images/avatar.jpg" />
+                                <span class="nickname">逍遥生</span>
+                                <span class="pub-time">2017-10-2 14:08</span>
+                            </div>
+                            <!-- 回答内容 -->
+                            <div class="answer-content">然后再开机就黑屏了无法开机，机箱在运转，检查显示器连线都正常，自动更新程序一直在禁用，在光驱中放入安装盘无法显示。请问怎么办？给出出招啊一开始给拔了，然后再开机</div>
+                            <!-- 回答评价 -->
+                            <div class="answer-estimate">
+                            	<span class="support"><a href="">支持</a>&nbsp;(0)</span>&nbsp;&nbsp;
+                                <span class="oppose"><a href="">反对</a>&nbsp;(0)</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 加载更多 -->
+                <div class="load-more">
+                	<a href="">加载更多</a>
+                </div>
+                <!-- 我来回答 -->
+                <div class="my-answer">
+                	<!-- 标题 -->
+                    <h3 class="title">我来回答</h3>
+                    <!-- 回答内容编辑器 -->
+                    <script id="my-answer-edit">
+					</script>
+                    <button class="btn-submit">提交答案</button>
+                </div>
+            </div>
+            
+            <!-- 右侧 -->
+            <div class="right">
+            	<!-- 提问者信息容器 -->
+            	<div class="question-container">
+                	<p class="info">
+                    	<img class="avatar" src="../src/images/avatar.jpg" width="64" height="64" />
+                        <span class="nickname">Zero</span>
+                    </p>                   
+                </div>
+                
+                <!-- TA的提问容器 -->
+            	<div class="ta-container">
+                	<h3 class="title">TA&nbsp;的提问</h3>
+                    <ul>
+                        <li>
+                        	<a href="">PHP 是什么？</a>
+                            <span class="answer-number">20&nbsp;回答</span>
+                        </li>
+                        <li>
+                        	<a href="">Java 环境怎么搭建？</a>
+                            <span class="answer-number">20&nbsp;回答</span>
+                        </li>
+                        <li>
+                        	<a href="">Android 环境怎么搭建？</a>
+                            <span class="answer-number">20&nbsp;回答</span>
+                        </li>
+                        <li>
+                        	<a href="">jQuery 是什么？</a>
+                            <span class="answer-number">20&nbsp;回答</span>
+                        </li>
+                        <li>
+                        	<a href="">Ajax 有什么用？</a>
+                            <span class="answer-number">20&nbsp;回答</span>
+                        </li>
+                        <li>
+                        	<a href="">Apache+PHP 配置</a>
+                            <span class="answer-number">20&nbsp;回答</span>
+                        </li>
+                        <li>
+                        	<a href="">LAMP环境怎么搭建</a>
+                            <span class="answer-number">20&nbsp;回答</span>
+                        </li>
+                        <li>
+                        	<a href="">电脑黑屏，进不去系统怎么办？</a>
+                            <span class="answer-number">20&nbsp;回答</span>
+                        </li>
+                        <li>
+                        	<a href="">U盘怎么安装系统？</a>
+                            <span class="answer-number">20&nbsp;回答</span>
+                        </li>
+                        <li>
+                        	<a href="">Ajax 有什么用？</a>
+                            <span class="answer-number">20&nbsp;回答</span>
+                        </li>
+                        <li>
+                        	<a href="">Apache+PHP 配置</a>
+                            <span class="answer-number">20&nbsp;回答</span>
+                        </li>
+                        <li>
+                        	<a href="">LAMP环境怎么搭建</a>
+                            <span class="answer-number">20&nbsp;回答</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <div id="footer">
+    	<!-- 居中容器 -->
+    	<div class="center-container">
+        	<p class="intro">Zero - 一个零距离问答互动平台</p>
+            <p class="copyright">Copyright @ 2017 By Zero.</p>
+        </div>
+    </div>
+    
+    <!-- 组件 -->
+    <div id="com">
+    	<!-- 背景 -->
+        <div class="bg">
+        </div>
+    
+    	<!-- 登录/注册组件 -->
+        <div class="login">
+        	<!-- 标题栏 -->
+            <div class="title-bar">
+            	<a id="a-login-selection" class="a-login" href="" >登录</a>
+                <a id="a-reg-selection" class="a-register" href="">注册</a>
+            </div>
+            
+            <!-- 登录控件容器 -->
+            <div id="login-container" class="login-container main-container">
+            	<ul>
+                	<li><span class="hint">请填写信息</span></li>
+                	<li><input type="text" placeholder="用户名" /></li>
+                    <li><input type="password" placeholder="密码" /></li>
+                    <li><button>登&nbsp;&nbsp;&nbsp;&nbsp;录</button></li>
+                </ul>
+            </div>
+            
+            <!-- 注册控件容器 -->
+            <div id="reg-container" class="reg-container main-container">
+            	<ul>
+                	<li><span class="hint">请填写信息</span></li>
+                	<li><input type="text" placeholder="用户名" /></li>
+                    <li><input type="text" placeholder="昵称" /></li>
+                    <li><input type="password" placeholder="密码" /></li>
+                    <li><input type="password" placeholder="重复密码" /></li>
+                    <li><button>注&nbsp;&nbsp;&nbsp;&nbsp;册</button></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

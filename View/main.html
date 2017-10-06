@@ -1,0 +1,388 @@
+﻿<!doctype html>
+<html>
+<head>
+<title>Zero - 主页</title>
+<meta charset="utf-8" />
+<link type="text/css" rel="stylesheet" href="../src/css/style.css" /><!-- 公共样式库 -->
+<link type="text/css" rel="stylesheet" href="../src/css/ui.css" /><!-- 组件样式库 -->
+<script type="text/javascript" src="../src/js/jquery-1.8.0.min.js"></script><!-- jQuery 核心库 -->
+<script type="text/javascript" src="../src/js/jquery.animate-shadow.js"></script><!-- jQuery 阴影动画插件 -->
+<script type="text/javascript" src="../src/js/UI.js"></script>
+<script type="text/javascript" src="../src/js/Effect.js"></script>
+<script type="text/javascript">
+<!--
+	var eft = new Effect();
+	
+	//DOM载入
+	$(function(){
+		eft.comAuto();//组建自适应窗口
+		eft.authCom();//认证组件
+	})
+	
+	//窗口大小重置
+	$(window).resize(function(e) {
+        eft.comAuto();//组件自适应窗口
+    });
+	
+	//滚动条运动
+	$(window).scroll(function(e) {
+		eft.navShadow();//导航栏阴影
+    });
+//-->
+</script>
+</head>
+
+<body>
+	<!-- 导航 -->
+    <div id="nav">
+    	<!-- 导航栏 -->
+    	<div class="nav-bar">
+        	<!-- LOGO -->
+        	<div class="logo-container">
+            	<img src="../src/images/logo.png" />
+            </div>
+            <!-- 搜索 -->
+            <div class="search-container">
+            	<form onSubmit="return false;">
+                	<input type="text" />
+                    <button></button>
+                </form>
+            </div>
+            <!-- 用户状态 -->
+            <div class="user-status-container">
+            	<!-- 未登录 -->
+            	<div class="logout" style="display:none0;">
+                    <a id="a-login-menu" href="">登录</a>
+                    <a id="a-reg-menu" href="">注册</a>
+                </div>
+                
+                <!-- 已登录 -->
+                <div class="logined" style="display:none;">
+                	<a href="" class="a-link notice">&nbsp;</a>
+                    <a href="" class="person a-link">个人中心</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 主体 -->
+    <div id="index-main">
+    	<!-- 容器1-显示用户统计信息 -->
+        <div class="container-1">
+        	<!-- 居中容器 -->
+            <div class="center-container">
+                <!-- 用户在线统计板 -->
+                <div class="user-online">
+                	<!-- 标题 -->
+                    <h3 class="title">在线用户</h3>
+                    <!-- 内容 -->
+                    <div class="content-bg">
+                    	<div class="content-front">
+                        	<h1 class="user-counts">9,327,562</h1>
+                        </div>
+                    </div>
+                </div>
+                <!-- 欢迎语容器 -->
+                <div class="welcome-container">
+                	<h1>欢迎来到</h1>
+                </div>
+                <!-- 我要提问入口 -->
+                <div class="question-container">
+                	<button>我要提问</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 容器2 -->
+        <div class="container-2">
+        	<!-- 左侧 -->
+            <div class="left">
+            	<div class="left-1">
+                	<div class="l">
+                    	<h3 class="title">最新问题&nbsp;<a class="more-flag" href="" title="更多">»</a></h3>
+                        <ul>
+                        	<li><a href="">Java 环境怎么搭建？</a>&nbsp;&nbsp;0&nbsp;回答</li>
+                            <li><a href="">Android 环境怎么搭建？</a>&nbsp;&nbsp;0&nbsp;回答</li>
+                            <li><a href="">Java 环境怎么搭建？</a>&nbsp;&nbsp;0&nbsp;回答</li>
+                            <li><a href="">Android 环境怎么搭建？</a>&nbsp;&nbsp;0&nbsp;回答</li>
+                            <li><a href="">Java 环境怎么搭建？</a>&nbsp;&nbsp;0&nbsp;回答</li>
+                            <li><a href="">Android 环境怎么搭建？</a>&nbsp;&nbsp;0&nbsp;回答</li>
+                            <li><a href="">Java 环境怎么搭建？</a>&nbsp;&nbsp;0&nbsp;回答</li>
+                            <li><a href="">Android 环境怎么搭建？</a>&nbsp;&nbsp;0&nbsp;回答</li>
+                            <li><a href="">Java 环境怎么搭建？</a>&nbsp;&nbsp;0&nbsp;回答</li>
+                            <li><a href="">Android 环境怎么搭建？</a>&nbsp;&nbsp;0&nbsp;回答</li>
+                            <li><a href="">Java 环境怎么搭建？</a>&nbsp;&nbsp;0&nbsp;回答</li>
+                            <li><a href="">Android 环境怎么搭建？</a>&nbsp;&nbsp;0&nbsp;回答</li>
+                        </ul>
+                    </div>
+                	<div class="r">
+                    	<h3 class="title">最新解决&nbsp;<a class="more-flag" href="" title="更多">»</a></h3>
+                        <ul>
+                        	<li><a href="">Java 环境怎么搭建？</a>&nbsp;&nbsp;6&nbsp;回答</li>
+                            <li><a href="">Android 环境怎么搭建？</a>&nbsp;&nbsp;1&nbsp;回答</li>
+                            <li><a href="">Java 环境怎么搭建？</a>&nbsp;&nbsp;5&nbsp;回答</li>
+                            <li><a href="">Android 环境怎么搭建？</a>&nbsp;&nbsp;10&nbsp;回答</li>
+                            <li><a href="">Java 环境怎么搭建？</a>&nbsp;&nbsp;20&nbsp;回答</li>
+                            <li><a href="">Android 环境怎么搭建？</a>&nbsp;&nbsp;8&nbsp;回答</li>
+                            <li><a href="">Java 环境怎么搭建？</a>&nbsp;&nbsp;20&nbsp;回答</li>
+                            <li><a href="">Android 环境怎么搭建？</a>&nbsp;&nbsp;62&nbsp;回答</li>
+                            <li><a href="">Java 环境怎么搭建？</a>&nbsp;&nbsp;1&nbsp;回答</li>
+                            <li><a href="">Android 环境怎么搭建？</a>&nbsp;&nbsp;6&nbsp;回答</li>
+                            <li><a href="">Java 环境怎么搭建？</a>&nbsp;&nbsp;9&nbsp;回答</li>
+                            <li><a href="">Android 环境怎么搭建？</a>&nbsp;&nbsp;6&nbsp;回答</li>
+                        </ul>
+                    </div>
+                </div>
+            	<div class="left-2">
+                	<div class="title-bar">
+                		<h3 class="title">随机问答</h3>
+                        <span><a href="">更换</a></span>
+                    </div>
+                    <ul>
+                        <li><a href="">Java</a></li>
+                        <li><a href="">Android</a></li>
+                        <li style="background:#009966;"><a href="">PHP</a></li>
+                        <li><a href="">Node.js</a></li>
+                        <li><a href="">人工智能</a></li>
+                        <li style="background:#009966;"><a href="">Ajax</a></li>
+                        <li style="background:#009966;"><a href="">JavaScript</a></li>
+                        <li><a href="">Redis</a></li>
+                        <li><a href="">MySQL</a></li>
+                        <li style="background:#009966;"><a href="">jQuery</a></li>
+                        <li style="background:#009966;"><a href="">Linux</a></li>
+                        <li><a href="">HTML5</a></li>
+                        <li><a href="">CSS3</a></li>
+                        <li><a href="">Extjs</a></li>
+                        <li><a href="">ThinkPHP</a></li>
+                        <li><a href="">Yii</a></li>
+                        <li><a href="">二次开发</a></li>
+                        <li><a href="">CMS</a></li>
+                        <li style="background:#009966;"><a href="">LAMP</a></li>
+                        <li style="background:#009966;"><a href="">WAMP</a></li>
+                        <li><a href="">Java</a></li>
+                        <li><a href="">Android</a></li>
+                        <li style="background:#009966;"><a href="">PHP</a></li>
+                        <li><a href="">Node.js</a></li>
+                        <li><a href="">人工智能</a></li>
+                        <li style="background:#009966;"><a href="">Ajax</a></li>
+                        <li style="background:#009966;"><a href="">JavaScript</a></li>
+                        <li><a href="">Redis</a></li>
+                        <li><a href="">MySQL</a></li>
+                        <li style="background:#009966;"><a href="">jQuery</a></li>
+                        <li style="background:#009966;"><a href="">Linux</a></li>
+                        <li><a href="">HTML5</a></li>
+                        <li><a href="">CSS3</a></li>
+                        <li><a href="">Extjs</a></li>
+                        <li><a href="">ThinkPHP</a></li>
+                        <li><a href="">Yii</a></li>
+                        <li><a href="">二次开发</a></li>
+                        <li><a href="">CMS</a></li>
+                        <li style="background:#009966;"><a href="">LAMP</a></li>
+                        <li style="background:#009966;"><a href="">WAMP</a></li>
+                        <li><a href="">Java</a></li>
+                        <li><a href="">Android</a></li>
+                        <li style="background:#009966;"><a href="">PHP</a></li>
+                        <li><a href="">Node.js</a></li>
+                        <li><a href="">人工智能</a></li>
+                        <li style="background:#009966;"><a href="">Ajax</a></li>
+                        <li style="background:#009966;"><a href="">JavaScript</a></li>
+                        <li><a href="">Redis</a></li>
+                        <li><a href="">MySQL</a></li>
+                        <li style="background:#009966;"><a href="">jQuery</a></li>
+                        <li style="background:#009966;"><a href="">Linux</a></li>
+                        <li><a href="">HTML5</a></li>
+                        <li><a href="">CSS3</a></li>
+                        <li><a href="">Extjs</a></li>
+                        <li><a href="">ThinkPHP</a></li>
+                        <li><a href="">Yii</a></li>
+                        <li><a href="">二次开发</a></li>
+                        <li><a href="">CMS</a></li>
+                        <li style="background:#009966;"><a href="">LAMP</a></li>
+                        <li style="background:#009966;"><a href="">WAMP</a></li>
+                        <li><a href="">Java</a></li>
+                        <li><a href="">Android</a></li>
+                        <li style="background:#009966;"><a href="">PHP</a></li>
+                        <li><a href="">Node.js</a></li>
+                        <li><a href="">人工智能</a></li>
+                        <li style="background:#009966;"><a href="">Ajax</a></li>
+                        <li style="background:#009966;"><a href="">JavaScript</a></li>
+                        <li><a href="">Redis</a></li>
+                        <li><a href="">MySQL</a></li>
+                        <li style="background:#009966;"><a href="">jQuery</a></li>
+                        <li style="background:#009966;"><a href="">Linux</a></li>
+                        <li><a href="">HTML5</a></li>
+                        <li><a href="">CSS3</a></li>
+                        <li><a href="">Extjs</a></li>
+                        <li><a href="">ThinkPHP</a></li>
+                        <li><a href="">Yii</a></li>
+                        <li><a href="">二次开发</a></li>
+                        <li><a href="">CMS</a></li>
+                        <li style="background:#009966;"><a href="">LAMP</a></li>
+                        <li style="background:#009966;"><a href="">WAMP</a></li>
+                        <li><a href="">Java</a></li>
+                        <li><a href="">Android</a></li>
+                        <li style="background:#009966;"><a href="">PHP</a></li>
+                        <li><a href="">Node.js</a></li>
+                        <li><a href="">人工智能</a></li>
+                        <li style="background:#009966;"><a href="">Ajax</a></li>
+                        <li style="background:#009966;"><a href="">JavaScript</a></li>
+                        <li><a href="">Redis</a></li>
+                        <li><a href="">MySQL</a></li>
+                        <li style="background:#009966;"><a href="">jQuery</a></li>
+                        <li style="background:#009966;"><a href="">Linux</a></li>
+                        <li><a href="">HTML5</a></li>
+                        <li><a href="">CSS3</a></li>
+                        <li><a href="">Extjs</a></li>
+                        <li><a href="">ThinkPHP</a></li>
+                        <li><a href="">Yii</a></li>
+                        <li><a href="">二次开发</a></li>
+                        <li><a href="">CMS</a></li>
+                        <li style="background:#009966;"><a href="">LAMP</a></li>
+                        <li style="background:#009966;"><a href="">WAMP</a></li>
+                        <li><a href="">Java</a></li>
+                        <li><a href="">Android</a></li>
+                        <li style="background:#009966;"><a href="">PHP</a></li>
+                        <li><a href="">Node.js</a></li>
+                        <li><a href="">人工智能</a></li>
+                        <li style="background:#009966;"><a href="">Ajax</a></li>
+                        <li style="background:#009966;"><a href="">JavaScript</a></li>
+                        <li><a href="">Redis</a></li>
+                        <li><a href="">MySQL</a></li>
+                        <li style="background:#009966;"><a href="">jQuery</a></li>
+                        <li style="background:#009966;"><a href="">Linux</a></li>
+                        <li><a href="">HTML5</a></li>
+                        <li><a href="">CSS3</a></li>
+                        <li><a href="">Extjs</a></li>
+                        <li><a href="">ThinkPHP</a></li>
+                        <li><a href="">Yii</a></li>
+                        <li><a href="">二次开发</a></li>
+                        <li><a href="">CMS</a></li>
+                        <li style="background:#009966;"><a href="">LAMP</a></li>
+                        <li style="background:#009966;"><a href="">WAMP</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 右侧 -->
+            <div class="right">
+            	<!-- 公告栏容器 -->
+            	<div class="notice-container">
+                	<h3 class="title">最新公告</h3>
+                    <ul>
+                        <li><a href="">Zero 简介</a><span class="pub-time">2017-9-26 22:04</span></li>
+                        <li><a href="">给新伙伴的一封信</a><span class="pub-time">2017-9-26 22:04</span></li>
+                        <li><a href="">Zero 简介</a><span class="pub-time">2017-9-26 22:04</span></li>
+                        <li><a href="">给新伙伴的一封信</a><span class="pub-time">2017-9-26 22:04</span></li>
+                        <li><a href="">Zero 简介</a><span class="pub-time">2017-9-26 22:04</span></li>
+                        <li><a href="">给新伙伴的一封信</a><span class="pub-time">2017-9-26 22:04</span></li>
+                    </ul>
+                </div>
+                
+                <!-- 达人榜容器 -->
+            	<div class="good-container">
+                	<h3 class="title">达人榜</h3>
+                    <ul>
+                        <li>
+                        	<img src="../src/images/avatar.jpg" />
+                            <span class="nickname">Zero</span>
+                            <span class="help">60&nbsp;帮助</span>
+                        </li>
+                        <li>
+                        	<img src="../src/images/avatar.jpg" />
+                            <span class="nickname">逍遥生</span>
+                            <span class="help">60&nbsp;帮助</span>
+                        </li>
+                        <li>
+                        	<img src="../src/images/avatar.jpg" />
+                            <span class="nickname">雨过天晴</span>
+                            <span class="help">60&nbsp;帮助</span>
+                        </li>
+                        <li>
+                        	<img src="../src/images/avatar.jpg" />
+                            <span class="nickname">缘</span>
+                            <span class="help">60&nbsp;帮助</span>
+                        </li>
+                        <li>
+                        	<img src="../src/images/avatar.jpg" />
+                            <span class="nickname">青春飞扬</span>
+                            <span class="help">60&nbsp;帮助</span>
+                        </li>
+                        <li>
+                        	<img src="../src/images/avatar.jpg" />
+                            <span class="nickname">小蜜蜂</span>
+                            <span class="help">60&nbsp;帮助</span>
+                        </li>
+                        <li>
+                        	<img src="../src/images/avatar.jpg" />
+                            <span class="nickname">一只会飞的羊</span>
+                            <span class="help">60&nbsp;帮助</span>
+                        </li>
+                        <li>
+                        	<img src="../src/images/avatar.jpg" />
+                            <span class="nickname">码农</span>
+                            <span class="help">60&nbsp;帮助</span>
+                        </li>
+                        <li>
+                        	<img src="../src/images/avatar.jpg" />
+                            <span class="nickname">羽翼天使</span>
+                            <span class="help">60&nbsp;帮助</span>
+                        </li>
+                        <li>
+                        	<img src="../src/images/avatar.jpg" />
+                            <span class="nickname">Mang 果</span>
+                            <span class="help">60&nbsp;帮助</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <div id="footer">
+    	<!-- 居中容器 -->
+    	<div class="center-container">
+        	<p class="intro">Zero - 一个零距离问答互动平台</p>
+            <p class="copyright">Copyright @ 2017 By Zero.</p>
+        </div>
+    </div>
+    
+    <!-- 组件 -->
+    <div id="com">
+    	<!-- 背景 -->
+        <div class="bg">
+        </div>
+    
+    	<!-- 登录/注册组件 -->
+        <div class="login">
+        	<!-- 标题栏 -->
+            <div class="title-bar">
+            	<a id="a-login-selection" class="a-login" href="" >登录</a>
+                <a id="a-reg-selection" class="a-register" href="">注册</a>
+            </div>
+            
+            <!-- 登录控件容器 -->
+            <div id="login-container" class="login-container main-container">
+            	<ul>
+                	<li><span class="hint">请填写信息</span></li>
+                	<li><input type="text" placeholder="用户名" /></li>
+                    <li><input type="password" placeholder="密码" /></li>
+                    <li><button>登&nbsp;&nbsp;&nbsp;&nbsp;录</button></li>
+                </ul>
+            </div>
+            
+            <!-- 注册控件容器 -->
+            <div id="reg-container" class="reg-container main-container">
+            	<ul>
+                	<li><span class="hint">请填写信息</span></li>
+                	<li><input type="text" placeholder="用户名" /></li>
+                    <li><input type="text" placeholder="昵称" /></li>
+                    <li><input type="password" placeholder="密码" /></li>
+                    <li><input type="password" placeholder="重复密码" /></li>
+                    <li><button>注&nbsp;&nbsp;&nbsp;&nbsp;册</button></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
