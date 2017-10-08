@@ -39,8 +39,7 @@ if(!is_dir(dirname($_SERVER['SCRIPT_FILENAME'])."/{$platName}")){
 /* 系统常量定义 */
 defined('DEBUG')		or define('DEBUG', false);//程序模式，开发和生产,默认关闭调试
 defined('DS')			or define('DS', DIRECTORY_SEPARATOR);//目录分隔符 '\' or '/'
-//应用路径
-defined('APP_PATH')		or define('APP_PATH', dirname($_SERVER['SCRIPT_FILENAME']).'/');
+defined('APP_PATH')		or define('APP_PATH', dirname($_SERVER['SCRIPT_FILENAME']).'/');//应用路径
 defined('ROOT_PATH')	or define('ROOT_PATH', __DIR__.'/');//框架路径
 defined('PLAT_PATH')	or define('PLAT_PATH', APP_PATH."{$platName}");//应用平台路径
 defined('CLS_EXT')		or define('CLS_EXT', '.class.php');//类文件后缀
@@ -84,6 +83,17 @@ function initApp(){
 	if(!is_dir(APP_PATH.'Session')){
 		mkdir(APP_PATH.'Session');
 		file_put_contents(APP_PATH.'Session/index.html', '');
+	}
+
+	//创建config目录
+	if(!is_dir(APP_PATH.'config')){
+		mkdir(APP_PATH.'config');
+		file_put_contents(APP_PATH.'config/index.html', '');
+	}
+
+	//创建配置文件副本
+	if(!is_file(APP_PATH.'config/config.php')){
+		copy(ROOT_PATH.'Config/config.php', APP_PATH.'config/config.php');
 	}
 }
 //启动自检

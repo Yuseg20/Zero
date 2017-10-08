@@ -65,6 +65,16 @@ function Effect(){
 		
 		//登录菜单单击事件
 		$('#a-login-menu').click(function(e) {
+			//重置所有内容
+			$('#login-hint').text('');
+			$('#login-txt-username').val('');
+			$('#login-txt-password').val('');
+			$('#reg-hint').text('');
+			$('#reg-txt-username').val('');
+			$('#reg-txt-nickname').val('');
+			$('#reg-txt-password').val('');
+			$('#reg-txt-re-password').val('');
+			
 			$('#com').css('display', 'block');
             $('#com').animate({
 				'opacity': 1
@@ -78,6 +88,16 @@ function Effect(){
 		
 		//注册菜单单击事件
 		$('#a-reg-menu').click(function(e) {
+			//重置所有输入框内容
+			$('#login-hint').text('');
+			$('#login-txt-username').val('');
+			$('#login-txt-password').val('');
+			$('#reg-hint').text('');
+			$('#reg-txt-username').val('');
+			$('#reg-txt-nickname').val('');
+			$('#reg-txt-password').val('');
+			$('#reg-txt-re-password').val('');
+			
             $('#com').css('display', 'block');
             $('#com').animate({
 				'opacity': 1

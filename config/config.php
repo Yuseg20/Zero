@@ -3,7 +3,7 @@
 
 return array(
 
-	//页面设置
+	/* 页面设置 */
 	"view" => [
 		"charset" => "UTF-8"//页面字符编码
 	],
@@ -20,11 +20,11 @@ return array(
 
 	/* MySQL 数据库配置 */
 	"mysql" => [
-		"host"     => "localhost",//数据库主机地址
+		"host"     => "127.0.0.1",//数据库主机地址
 		"port"	   => "3306",//端口号
 		"user"     => "root",//用户名
-		"password" => "",//密码
-		"db"       => "meblog",//数据库
+		"password" => "68852911",//密码
+		"db"       => "zero",//数据库
 		"charset"  => "utf8"//数据库编码
 	],
 

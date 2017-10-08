@@ -7,19 +7,17 @@ class Session{
 
 	//构造方法
 	public function __construct(){
-		//设置配置项
-		Config::setConfig('session');
-		if(Config::getValue('display') == "on"){
-			//自定义 Session
-			ini_set('session.save_path', Config::getValue('save_path'));//Session 文件保存位置
-			ini_set('session.gc_maxlifetime', Config::getValue('maxlifetime'));//Session 生命周期 s
-			ini_set('session.gc_probability', Config::getValue('probability'));//Session 回收几率分子
-			ini_set('session.gc_divisor',	  Config::getValue('divisor'));//Session 回收几率分母
+
+		//自定义 Session
+		if(Config::get('session.display') == "on"){
+			ini_set('session.save_path', Config::get('session.save_path'));//Session 文件保存位置
+			ini_set('session.gc_maxlifetime', Config::get('session.maxlifetime'));//Session 生命周期 s
+			ini_set('session.gc_probability', Config::get('session.probability'));//Session 回收几率分子
+			ini_set('session.gc_divisor', Config::get('session.divisor'));//Session 回收几率分母
 		}
 
 		//判断Redis是否开启
-		Config::setConfig('redis');
-		if(Config::getValue('display') == 'on'){
+		if(Config::get('redis.display') == 'on'){
 			//设置session存储机制为“用户自定义”，默认为文件
 			ini_set('session.save_handler', 'user');
 

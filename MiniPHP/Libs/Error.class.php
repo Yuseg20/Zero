@@ -20,7 +20,6 @@ class Error{
 		$errLine	错误行号
 	*/
 	public function errorProcess($errNo, $errStr, $errFile, $errLine){
-		echo "errorok";
 		echo "<h1><font color='#CCC'>MiniPHP</font></h1>";
 		echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;错误代号：{$errStr}<br/>";
 		echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;错误信息：{$errStr}<br/>";

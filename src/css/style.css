@@ -120,22 +120,28 @@ li{
 
 #nav .nav-bar .user-status-container .logined a:link,#nav .nav-bar .user-status-container .logined a:visited{
 	display:inline-block;
-	height:57px;
+	height:47px;
+	line-height:47px;
 	color:#FFF;
-	line-height:60px;
-	font-size:16px;
+	font-size:14px;
 }
 
 /* 通知 */
 #nav .nav-bar .user-status-container .logined .notice:link,#nav .nav-bar .user-status-container .logined .notice:visited{
-	padding:0 20px;
+	padding:0 12px;
 	background:url(../images/sbell.png) center no-repeat;
 }
 
 /* 个人中心 */
 #nav .nav-bar .user-status-container .logined .person:link,#nav .nav-bar .user-status-container .logined .person:visited{
-	padding:0 10px 0 35px;
-	background:url(../images/user.png) 10px center no-repeat;
+	padding:0 6px 0 22px;
+	background:url(../images/user.png) 6px center no-repeat;
+}
+
+/* 注销 */
+#nav .nav-bar .user-status-container .logined .logout:link,#nav .nav-bar .user-status-container .logined .logout:visited{
+	padding:0 6px 0 22px;
+	background:url(../images/logout.png) 6px center no-repeat;
 }
 
 /* 鼠标经过 */

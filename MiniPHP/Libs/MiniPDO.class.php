@@ -12,16 +12,16 @@ class MiniPDO{
 
 	//构造方法
 	public function __construct(){
-		//设置配置项
-		Config::setConfig('mysql');
 		//读取数据库配置信息
-		$host = Config::getValue('host');		//数据库地址
-		$port = Config::getValue('port');		//数据库端口
-		$user = Config::getValue('user');		//数据库用户名
-		$pwd  = Config::getValue('pwd');		//数据库密码
-		$db   = Config::getValue('db');			//数据库名
+		$host = Config::get('mysql.host');		//数据库地址
+		$port = Config::get('mysql.port');		//数据库端口
+		$user = Config::get('mysql.user');		//数据库用户名
+		$pwd  = Config::get('mysql.password');		//数据库密码
+		$db   = Config::get('mysql.db');		//数据库名
+		
 		//配置数据源
 		$this -> dsn = "mysql:{$host};port={$port};dbname={$db}";
+
 		//配置option
 		$this -> opt =array(
 			PDO::MYSQL_ATTR_INIT_COMMAND => "set names UTF8"//设置数据库编码
@@ -37,7 +37,7 @@ class MiniPDO{
 	}
 
 	//查询 预处理参数
-	public function query($sql, $params, $fetchStyle = 1){
+	public function query($sql, $params = array(), $fetchStyle = 1){
 		//SQL 语句预处理
 		$this -> stmt = $this -> pdo -> prepare($sql);
 		//遍历并绑定参数
@@ -73,6 +73,21 @@ class MiniPDO{
 	public function execute($sql){
 		//返回受影响记录行数
 		return $this -> pdo -> exec($sql);
+	}
+
+	//启动一个事务
+	public function beginTransaction(){
+		$this -> pdo -> beginTransaction();
+	}
+
+	//提交一个事务
+	public function commit(){
+		$this -> pdo -> commit();
+	}
+
+	//回滚一个事务
+	public function rollBack(){
+		$this -> pdo -> rollBack();
 	}
 
 	//关闭连接，释放资源

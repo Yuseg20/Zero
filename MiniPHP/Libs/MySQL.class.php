@@ -1,6 +1,6 @@
 <?php
 /*
-	MySQL 数据库操作工具
+	MySQL 数据库操作工具[MySQLi]
 */
 
 class MySQL{
@@ -10,20 +10,19 @@ class MySQL{
 
 	//构造方法,初始化数据库连接
 	public function __construct(){
-		//设置配置项
-		Config::setConfig('mysql');
 		//读取配置值
-		$host = Config::getValue('host');	//MySQL主机地址
-		$user = Config::getValue('user');	//用户名
-		$pwd  = Config::getValue('pwd');	//密码
-		$db   = Config::getValue('db');		//选择的数据库
+		$host = Config::get('mysql.host');		//MySQL主机地址
+		$user = Config::get('mysql.user');		//用户名
+		$pwd  = Config::get('mysql.password');	//密码
+		$db   = Config::get('mysql.db');		//选择的数据库
+
 		$this -> dbl = @new mysqli($host, $user, $pwd, $db);//建立了数据库连接
 		if($this->dbl->connect_error){//错误处理
 			$this->status = -1;
 			$this->msg = $this->dbl->connect_error;
 			return;
 		}
-		$this->dbl->set_charset('utf8');//设置默认字符编码
+		$this->dbl->set_charset(Config::get('mysql.charset'));//设置默认字符编码
 	}
 
 	//query 操作
@@ -43,6 +42,21 @@ class MySQL{
 		}
 		$q_result->free();//释放资源
 		return $r_result;//返回结果
+	}
+
+	//事务模式开关
+	public function autocommit($mode = true){
+		return $this -> dbl -> autocommit($mode);
+	}
+
+	//回滚事务
+	public function rollback(){
+		return $this -> dbl -> rollback();
+	}
+
+	//提交事务
+	public function commit(){
+		return $this -> dbl ->commit();
 	}
 
 	//关闭数据库连接

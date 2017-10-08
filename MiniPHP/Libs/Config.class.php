@@ -4,8 +4,7 @@
 
 class Config{
 
-	private static $allConfig = [];//所有配置信息
-	private static $config = [];//指定配置项
+	private static $jsonConfig = null;//配置信息对象
 
 	//构造方法 私有化
 	private function __construct(){
@@ -14,24 +13,39 @@ class Config{
 	//加载配置文件
 	public static function load($filename){
 		//判断文件是否存在
-		if(!is_file(ROOT_PATH."Config/{$filename}.php")){
+		if(!is_file(APP_PATH."config/{$filename}.php")){
 			return null;
 		}
-		//引用相应配置文件
-		self::$allConfig = require_once(ROOT_PATH."Config/{$filename}.php");
+
+		//读取相应配置文件
+		$arrConfig = require_once(APP_PATH."config/{$filename}.php");
+		//转换配置信息为json对象
+		self::$jsonConfig = json_decode(json_encode($arrConfig));
 	}
 
 	//获取指定配置项
-	public static function setConfig($configName){
-		if(!empty(self::$allConfig[$configName])){
-			self::$config = self::$allConfig[$configName];
-		}else{
-			self::$config = array();
+	public static function get($keyStr = ''){
+		if(empty($keyStr)){
+			return -1;
 		}
-	}
 
-	//获取指定值
-	public static function getValue($key){
-		return !empty(self::$config[$key]) ? self::$config[$key] : null;
+		//分解键名
+		$keys = explode('.', $keyStr);
+		//初始化json对象
+		$result = self::$jsonConfig;
+		//循环取值
+		for($i=0;$i<count($keys);$i++){
+			//判断对象属性是否存在
+			if(!property_exists($result, $keys[$i])){
+				//不存在则结束返回
+				return -2;
+			}
+
+			//存在赋值
+			$result = $result -> $keys[$i];
+		}
+
+		//返回结果
+		return $result;
 	}
 }

@@ -18,11 +18,3 @@ class Cookie{
 		return !empty($_COOKIE[$cookieName]) ? $_COOKIE[$cookieName] : null;
 	}
 }
-
-$cookie = new Cookie();
-if($cookie -> getVal('user') !== null){
-	echo $cookie -> getVal('user');
-}else{
-	echo 'Cookie 初始化...';
-	$cookie -> setVal('user', 'admin', 3600);
-}
