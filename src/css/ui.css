@@ -108,11 +108,11 @@
 	outline:none;
 	border-radius:2px;
 	cursor:pointer;
-	background:#F60;
+	background:#F60 center no-repeat;
 }
 
 #com ul li button:hover{
-	background:#F06200;
+	background-color:#F06200;
 }
 
 /* 登录 */

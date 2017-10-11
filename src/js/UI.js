@@ -106,7 +106,10 @@ function UI(){
 	
 	//消息提示框
 	this.messageDialog = function(obj,params){
-		$container = $('<div></div>');
+		//移除之前内容
+		$('.plugin-message-dialog').remove();
+		
+		$container = $("<div class='plugin-message-dialog'></div>");
 		$containerBg = $('<div></div>');
 		$content = $('<span></span>');
 		
@@ -156,7 +159,7 @@ function UI(){
 				'opacity':'0'
 			},{
 				complete:function(){
-					$container.remove();
+					$(this).remove();
 				}
 			});
 		},hiddenTime);

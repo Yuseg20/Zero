@@ -144,6 +144,23 @@ function Processor(){
             var username = $('#login-txt-username').val();
 			var password = $('#login-txt-password').val();
 			
+			//切换按钮状态样式
+			function changeBtn(style){
+				if(style == 0){//正常样式
+					//切换按钮样式
+					$('#btn-login').html('登&nbsp;&nbsp;&nbsp;&nbsp;录');
+					$('#btn-login').css({
+						'background-image':'none'
+					});
+				}else{//请求中样式
+					//切换按钮样式
+					$('#btn-login').html('');
+					$('#btn-login').css({
+						'background-image':'url('+ webDName + webRoot +'/src/images/loading.gif)'
+					});
+				}
+			}
+			
 			//检测用户名
 			var user = new RegExp('^[A-Za-z][A-Za-z0-9_]*$', 'g');
 			if(!user.test(username)){
@@ -177,6 +194,8 @@ function Processor(){
 			
 			//切换请求状态
 			isRequest = true;
+			//切换按钮状态
+			changeBtn(1);
 			
 			//发送登录请求
 			var sendData = {"q":'zero/auth/login',
@@ -198,6 +217,11 @@ function Processor(){
 								text: '登录成功'
 							});
 							
+							//切换请求状态
+							isRequest = false;
+							//切换按钮状态
+							changeBtn(0);
+							
 							//隐藏组件面板
 							$('#com').css('display', 'none');
 										
@@ -218,6 +242,8 @@ function Processor(){
 							
 							//切换请求状态
 							isRequest = false;
+							//切换按钮状态
+							changeBtn(0);
 						}
 					}
 				},
@@ -229,6 +255,8 @@ function Processor(){
 					
 					//切换请求状态
 					isRequest = false;
+					//切换按钮状态
+					changeBtn(0);
 				}
 			});
 		}
@@ -285,6 +313,9 @@ function Processor(){
 								text: '注销成功'
 							});
 							
+							//切换请求状态
+							isRequest = false;
+							
 							//切换用户显示状态
 							$('#logined').css('display', 'none');
 							$('#logout').css('display', 'block');
@@ -293,11 +324,28 @@ function Processor(){
 				},
 				error:function(xhr){
 					window.alert('Request Error');
+					//切换请求状态
 					isRequest = false;
 				}
 			});
 			
 			return false;
+        });
+	}
+	
+	//我要提问
+	this.ask = function(){
+		//请求标志
+		var isRequest = false;
+		
+		//我要提问单击事件
+		$('#btn-ask').click(function(e) {
+            if(isRequest){
+				return;
+			}
+			
+			//待发送数据
+			var sendData = {"q":'zero/article/checkcurrentuser'};
         });
 	}
 }
