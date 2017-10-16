@@ -1,8 +1,8 @@
-﻿<?php
+<?php
 	/* 网站配置模型 */
 	class WebConfigModel{
 
-		private $webConfig = [];
+		private $webConfig = array();
 
 		//初始化
 		public function __construct(){

@@ -21,11 +21,14 @@ $a_post_q = explode('/', $post_q);
 /* 提取分解内容 */
 if(!empty($post_q)){//POST请求优先
 	$platName = !empty($a_post_q[0]) ? $a_post_q[0] : 'index';//平台名
-	$mdlName  = !empty($a_post_q[1]) ? $a_post_q[1] . 'Controller' : 'IndexController';//模块名
+	/*
+		ucfirst()  将字符串首字母转成大写，遵循 Linux 下的大小写区分规则
+	*/
+	$mdlName  = ucfirst(!empty($a_post_q[1]) ? $a_post_q[1] . 'Controller' : 'IndexController');//模块名
 	$mthName  = !empty($a_post_q[2]) ? $a_post_q[2] : 'index';//方法名
 }else{//GET请求其次
 	$platName = !empty($a_get_q[0]) ? $a_get_q[0] : 'index';//平台名
-	$mdlName  = !empty($a_get_q[1]) ? $a_get_q[1] . 'Controller' : 'IndexController';//模块名
+	$mdlName  = ucfirst(!empty($a_get_q[1]) ? $a_get_q[1] . 'Controller' : 'IndexController');//模块名
 	$mthName  = !empty($a_get_q[2]) ? $a_get_q[2] : 'index';//方法名
 }
 
@@ -40,7 +43,7 @@ if(!is_dir(dirname($_SERVER['SCRIPT_FILENAME'])."/{$platName}")){
 defined('DEBUG')		or define('DEBUG', false);//程序模式，开发和生产,默认关闭调试
 defined('DS')			or define('DS', DIRECTORY_SEPARATOR);//目录分隔符 '\' or '/'
 defined('APP_PATH')		or define('APP_PATH', dirname($_SERVER['SCRIPT_FILENAME']).'/');//应用路径
-defined('ROOT_PATH')	or define('ROOT_PATH', __DIR__.'/');//框架路径
+defined('ROOT_PATH')	or define('ROOT_PATH', dirname(__FILE__).'/');//框架路径
 defined('PLAT_PATH')	or define('PLAT_PATH', APP_PATH."{$platName}");//应用平台路径
 defined('CLS_EXT')		or define('CLS_EXT', '.class.php');//类文件后缀
 defined('REQUEST_TYPE') or define('REQUEST_TYPE', !empty($post_q) ? 'post' : 'get');//请求方式

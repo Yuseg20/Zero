@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+<title>YUI 测试</title>
+<meta charset="utf-8" />
+<script type="text/javascript" src="../src/js/jquery-1.8.0.min.js"></script><!-- jQuery 核心库 -->
+<script type="text/javascript" src="../plugin/yui/yui.js"></script><!-- MUI 组件 -->
+<script type="text/javascript">
+<!--
+	var yui = new YUI('http://www.work.com/zero/plugin');
+	
+	//DOM载入
+	$(function(){
+		$('#btn-message-dialog').click(function(e) {
+           yui.messageDialog('body',{
+				text: 'YUI 测试',
+				delay:3000
+			});
+        });
+		
+		$('#btn-loading-dialog').click(function(e) {
+           var loadingDialog = yui.loadingDialog('body',{
+			   delay: 6000
+			});
+		   loadingDialog.hidden();
+        });
+	})
+//-->
+</script>
+</head>
+
+<body>
+	<button id="btn-message-dialog">YUI 消息提示框</button>
+    <button id="btn-loading-dialog">YUI 加载提示框</button>
+</body>
+</html>

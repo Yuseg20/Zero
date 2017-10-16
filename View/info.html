@@ -1,0 +1,22 @@
+
+<!-- 基本信息 -->
+<div class="base-info">
+    <!-- 标题栏 -->
+    <div class="title-bar">
+        <h3>基本信息</h3>
+        <button id="btn-save-info" class="btn-save">保&nbsp;&nbsp;存</button>
+    </div>
+    <!-- 内容 -->
+    <div class="content">
+        <ul>
+            <li>
+            	<span>用户名&nbsp;</span>
+                <input class="username" type="text" value="<?php echo $this -> get('user'); ?>" disabled />
+            </li>
+            <li>
+            	<span>昵&nbsp;&nbsp;&nbsp;称&nbsp;</span>
+                <input id="info-nickname" class="nickname" type="text" value="<?php echo $this -> get('nickname'); ?>" />
+            </li>
+        </ul>
+    </div>
+</div>

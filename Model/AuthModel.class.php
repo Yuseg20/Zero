@@ -12,14 +12,14 @@
 				return -1;
 			}
 			
-			//初始化参数数组
-			$params = array();
 			//创建数据库对象
 			$pdo = new MiniPDO();
 			//构造查询语句
 			$sql = "select * from user_auth where ua_user=:user";
 			//设置参数数组
-			$params['user'] = $user;
+			$params = array(
+				'user' => $user
+			);
 			//执行查询
 			$rs = $pdo -> query($sql, $params);
 			//关闭数据库连接
@@ -39,21 +39,16 @@
 				return -1;
 			}
 
-			//初始化参数数组
-			$params1 = array();
-			$params2 = array();
 			//创建数据库对象
 			$pdo = new MiniPDO();
 			//获取当前系统时间
 			$time = time();
+			//设置头像文件位置
+			$avatar = Config::get('path.avatar');
+			//构建SQL语句
 			$sql1 = "insert into user_auth (ua_user,ua_pwd) values ('{$user}','{$pwd}')";
-			$params1['user'] = $user;
-			$params1['pwd'] = $pwd;
-			$sql2 = "insert into user_info (ua_user,ui_nickname,ui_reg_time) 
-									values ('{$user}','{$nickname}','{$time}')";
-			$params2['user'] = $user;
-			$params2['nickname'] = $nickname;
-			$params2['time'] = $time;
+			$sql2 = "insert into user_info (ua_user,ui_nickname,ui_avatar,ui_reg_time) 
+									values ('{$user}','{$nickname}','{$avatar}','{$time}')";
 			//开启事务
 			$pdo -> beginTransaction();
 			$rs1 = $pdo -> execute($sql1);
@@ -81,14 +76,14 @@
 				return -1;
 			}
 
-			//初始化参数数组
-			$params = array();
 			//创建数据库对象
 			$pdo = new MiniPDO();
 			//构建查询语句
 			$sql = "select ua_pwd from user_auth where ua_user=:user";
 			//设置参数
-			$params['user'] = $user;
+			$params = array(
+				'user' => $user
+			);
 			//查询
 			$rs = $pdo -> query($sql, $params);
 

@@ -126,6 +126,11 @@ li{
 	font-size:14px;
 }
 
+/* 主页 */
+#nav .nav-bar .user-status-container .logined .index:link,#nav .nav-bar .user-status-container .logined .index:visited{
+	padding:0 8px;
+}
+
 /* 通知 */
 #nav .nav-bar .user-status-container .logined .notice:link,#nav .nav-bar .user-status-container .logined .notice:visited{
 	padding:0 12px;
@@ -134,14 +139,18 @@ li{
 
 /* 个人中心 */
 #nav .nav-bar .user-status-container .logined .person:link,#nav .nav-bar .user-status-container .logined .person:visited{
-	padding:0 6px 0 22px;
-	background:url(../images/user.png) 6px center no-repeat;
+	/*padding:0 6px 0 22px;*/
+	padding:0 12px;
+	/*background:url(../images/user.png) 6px center no-repeat;*/
+	background:url(../images/user.png) center no-repeat;
 }
 
 /* 注销 */
 #nav .nav-bar .user-status-container .logined .logout:link,#nav .nav-bar .user-status-container .logined .logout:visited{
-	padding:0 6px 0 22px;
-	background:url(../images/logout.png) 6px center no-repeat;
+	/*padding:0 6px 0 22px;*/
+	padding:0 12px;
+	/*background:url(../images/logout.png) 6px center no-repeat;*/
+	background:url(../images/logout.png) center no-repeat;
 }
 
 /* 鼠标经过 */

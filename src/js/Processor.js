@@ -48,7 +48,7 @@ function Processor(){
 					regHint.text('密码长度 6~20 位');
 					
 					return;
-				}else if(!pwd.test(password)){
+				}else if(!pwd.test(password) || $.trim(password).length == 0){
 					regHint.css({
 						'color':'#F00'
 					});
@@ -81,7 +81,7 @@ function Processor(){
 							//注册成功
 							
 							//显示提示框
-							ui.messageDialog('body',{
+							yui.messageDialog('body',{
 								text: '欢迎来到 Zero 社区'
 							});
 							
@@ -96,6 +96,9 @@ function Processor(){
 							$('#logined').css({
 								'display':'block'
 							});
+							
+							//切换请求状态
+							isRequest = false;
 						}else if(data.status == '-1'){
 							//用户名已存在
 							regHint.css({
@@ -104,7 +107,7 @@ function Processor(){
 							regHint.text('用户名已存在');
 							
 							//切换请求状态
-							isRequest = true;
+							isRequest = false;
 						}else if(data.status == '-2'){
 							//注册失败
 							regHint.css({
@@ -113,7 +116,7 @@ function Processor(){
 							regHint.text('注册失败');
 							
 							//切换请求状态
-							isRequest = true;
+							isRequest = false;
 						}
 					}
 				},
@@ -124,7 +127,7 @@ function Processor(){
 					regHint.text('请求出错');
 					
 					//切换请求状态
-					isRequest = true;
+					isRequest = false;
 				}
 			});
         });
@@ -213,7 +216,7 @@ function Processor(){
 							//登录成功
 							
 							//显示提示框
-							ui.messageDialog('body',{
+							yui.messageDialog('body',{
 								text: '登录成功'
 							});
 							
@@ -309,7 +312,7 @@ function Processor(){
 							//注销成功
 							
 							//消息提示
-							ui.messageDialog('body',{
+							yui.messageDialog('body',{
 								text: '注销成功'
 							});
 							
@@ -319,11 +322,15 @@ function Processor(){
 							//切换用户显示状态
 							$('#logined').css('display', 'none');
 							$('#logout').css('display', 'block');
+							
+							//跳转至主页
+							if(typeof(nowPage) != 'undefined'){
+								window.location.href=webDName + webRoot;
+							}
 						}
 					}
 				},
 				error:function(xhr){
-					window.alert('Request Error');
 					//切换请求状态
 					isRequest = false;
 				}
@@ -333,19 +340,637 @@ function Processor(){
         });
 	}
 	
-	//我要提问
-	this.ask = function(){
-		//请求标志
-		var isRequest = false;
+	//个人中心四项功能
+	this.personOpt = function(){
+		var isRequest = null;
+		var loadingDialog = null;
+		var messageDialog = null;
+		var isRequesting = false;
 		
-		//我要提问单击事件
-		$('#btn-ask').click(function(e) {
-            if(isRequest){
-				return;
+		//绑定发布事件
+		function bindPublish(){
+			$('#btn-publish').click(function(e) {
+				//获取标题和描述
+				var title = $('#ask-title').val();
+				var desc = $('#ask-desc').val();
+				
+				//请求中拦截
+				if(isRequesting){
+					return;
+				}
+				
+				//移除上一个消息提示框
+				if(messageDialog){
+					messageDialog.remove();
+				}
+				
+				//移除上一个加载提示框
+				if(loadingDialog){
+					loadingDialog.remove();
+				}
+				
+				//检测标题和描述
+				if($.trim(title) == ''){
+					messageDialog = yui.messageDialog('body',{
+						text: '标题不能为空'
+					});
+					return;
+				}else if(title.length > 20){
+					messageDialog = yui.messageDialog('body',{
+						text: '标题长度不能超过 20 个字符'
+					});
+					return;
+				}else if(desc.length > 600){
+					messageDialog = yui.messageDialog('body',{
+						text: '描述长度不能超过 600 个字符'
+					});
+				}
+
+				//显示加载提示框
+				loadingDialog = yui.loadingDialog('body');
+				
+				//改变请求中状态
+				isRequesting = true;
+				
+				//发送保存请求
+				var sendData = {
+									"q":"zero/person/publish",
+									"title": title,
+									"desc": desc
+							  	};
+				isRequest = $.ajax({
+					url: webDName + webRoot +'/index.php',
+					type: 'POST',
+					data: sendData,
+					dataType: 'json',
+					success: function(data, status){
+						//移除加载提示框
+						loadingDialog.hidden();
+						
+						if(data.status == 0){
+							//发布成功
+							
+							getAsk();
+							
+							//显示消息提示框
+							messageDialog = yui.messageDialog('body',{
+								text: '发布成功'
+							});
+							
+							//改变请求中状态
+							isRequesting = false;
+						}else if(data.status == -1){
+							//用户未登录
+							//显示消息提示框
+							messageDialog = yui.messageDialog('body',{
+								text: '请先登录'
+							});
+							
+							//改变请求中状态
+							isRequesting = false;
+						}else if(data.status == -2){
+							//发布失败
+							//显示消息提示框
+							messageDialog = yui.messageDialog('body',{
+								text: '发布失败'
+							});
+							
+							isRequesting = false;
+						}
+					},
+					error: function(jqXHR, status, error){
+						if(status == 'abort'){
+							return;
+						}
+						
+						//移除加载提示框
+						loadingDialog.hidden();
+						
+						//显示消息提示框
+						messageDialog = yui.messageDialog('body',{
+							text: '请求出错'
+						});
+						
+						//改变请求中状态
+						isRequesting = false;
+					}
+				});
+			});
+		}
+		
+		//绑定我要提问事件
+		function bindAsk(){
+			$('#btn-ask').click(function(e) {				
+				//终止之前所有请求
+				if(isRequest){
+					isRequest.abort();
+				}
+				
+				//移除上一个消息提示框
+				if(messageDialog){
+					messageDialog.remove();
+				}
+				
+				//移除上一个加载提示框
+				if(loadingDialog){
+					loadingDialog.remove();
+				}
+
+				//显示加载提示框
+				loadingDialog = yui.loadingDialog('body');
+				
+				//发送保存请求
+				var sendData = {
+									"q":"zero/person/getCreateAsk"
+							  	};
+				isRequest = $.ajax({
+					url: webDName + webRoot +'/index.php',
+					type: 'POST',
+					data: sendData,
+					dataType: 'json',
+					success: function(data, status){
+						//移除加载提示框
+						loadingDialog.hidden();
+						
+						if(data.status == 0){
+							//获取成功
+							
+							$('#person-right').html(data.content);
+							
+							//绑定发布事件
+							bindPublish();
+						}else if(data.status == -1){
+							//用户未登录
+							//显示消息提示框
+							messageDialog = yui.messageDialog('body',{
+								text: '请先登录'
+							});
+						}else if(data.status == -2){
+							//修改失败
+							//显示消息提示框
+							messageDialog = yui.messageDialog('body',{
+								text: '保存失败'
+							});
+						}
+					},
+					error: function(jqXHR, status, error){
+						if(status == 'abort'){
+							return;
+						}
+						
+						//移除加载提示框
+						loadingDialog.hidden();
+						
+						//显示消息提示框
+						messageDialog = yui.messageDialog('body',{
+							text: '请求出错'
+						});
+					}
+				});
+			});
+		}
+		
+		//获取提问
+		function getAsk(){
+			//终止上一个请求
+			if(isRequest){
+				isRequest.abort();
 			}
 			
-			//待发送数据
-			var sendData = {"q":'zero/article/checkcurrentuser'};
+			//移除上一个加载提示框
+			if(loadingDialog){
+				loadingDialog.remove();
+			}
+			
+			//移除上一个消息提示框
+			if(messageDialog){
+				messageDialog.remove();
+			}
+			
+			//显示新的加载提示框
+			loadingDialog = yui.loadingDialog('body');
+			
+            //Ajax请求基本信息页面
+			var sendData = {"q":"zero/person/getMyAsk"};
+			isRequest = $.ajax({
+				url: webDName + webRoot +'/index.php',
+				type: 'POST',
+				data: sendData,
+				dataType: "json",
+				success: function(data, status){
+					//移除加载提示框
+					loadingDialog.hidden();
+					
+					if(data.status == 0){
+						//获取成功
+						$('#person-right').html(data.content);
+						
+						//绑定我要提问事件
+						bindAsk();
+					}else{
+						//获取失败
+						//显示消息提示框
+						messageDialog = yui.messageDialog('body',{
+							text: '加载失败'
+						});
+					}
+				},
+				error: function(jqXHR, status, error){					
+					//用户终止上一个请求的错误
+					if(status == 'abort'){
+						return;
+					}
+					
+					//其他错误
+					//移除加载提示框
+					loadingDialog.hidden();
+					
+					//显示消息提示框
+					messageDialog = yui.messageDialog('body',{
+						text: '请求出错'
+					});
+				}
+			});
+		}
+		
+		getAsk();
+		
+		//我的提问
+		$('#person-my-ask').click(function(e) {
+            getAsk();
+        });
+		
+		//我的回答
+		$('#person-my-answer').click(function(e) {
+            //终止上一个请求
+			if(isRequest){
+				isRequest.abort();
+			}
+			
+			//移除上一个加载提示框
+			if(loadingDialog){
+				loadingDialog.remove();
+			}
+			
+			//移除上一个消息提示框
+			if(messageDialog){
+				messageDialog.remove();
+			}
+			
+			//显示新的加载提示框
+			loadingDialog = yui.loadingDialog('body');
+			
+            //Ajax请求我的回答页面
+			var sendData = {"q":"zero/person/getMyAnswer"};
+			isRequest = $.ajax({
+				url: webDName + webRoot +'/index.php',
+				type: 'POST',
+				data: sendData,
+				dataType: "json",
+				success: function(data, status){
+					//移除加载提示框
+					loadingDialog.hidden();
+					
+					if(data.status == 0){
+						//获取成功
+						$('#person-right').html(data.content);
+						
+						//绑定我要提问事件
+						//bindAsk();
+					}else{
+						//获取失败
+						//显示消息提示框
+						messageDialog = yui.messageDialog('body',{
+							text: '加载失败'
+						});
+					}
+				},
+				error: function(jqXHR, status, error){					
+					//用户终止上一个请求的错误
+					if(status == 'abort'){
+						return;
+					}
+					
+					//其他错误
+					//移除加载提示框
+					loadingDialog.hidden();
+					
+					//显示消息提示框
+					messageDialog = yui.messageDialog('body',{
+						text: '请求出错'
+					});
+				}
+			});
+        });
+		
+		//绑定保存个人基本信息事件
+		function bindSaveInfo(){
+			$('#btn-save-info').click(function(e) {
+				var nickname = $('#info-nickname').val();
+				
+				//终止之前所有请求
+				if(isRequest){
+					isRequest.abort();
+				}
+				
+				//移除上一个消息提示框
+				if(messageDialog){
+					messageDialog.remove();
+				}
+				
+				//移除上一个加载提示框
+				if(loadingDialog){
+					loadingDialog.remove();
+				}
+				
+				//昵称空间超限提示
+				if(nickname.length > 12){
+					messageDialog = yui.messageDialog('body',{
+						text: '昵称不能超过 12 个字符'
+					});
+					return;
+				}
+				
+				//显示加载提示框
+				loadingDialog = yui.loadingDialog('body');
+				
+				//发送保存请求
+				var sendData = {
+									"q":"zero/person/saveBaseInfo",
+									"nickname":nickname
+							  	};
+				isRequest = $.ajax({
+					url: webDName + webRoot +'/index.php',
+					type: 'POST',
+					data: sendData,
+					dataType: 'json',
+					success: function(data, status){
+						//移除加载提示框
+						loadingDialog.hidden();
+						
+						if(data.status == 0){
+							//修改成功
+							//显示消息提示框
+							messageDialog = yui.messageDialog('body',{
+								text: '保存成功'
+							});
+						}else if(data.status == -1){
+							//用户未登录
+							//显示消息提示框
+							messageDialog = yui.messageDialog('body',{
+								text: '请先登录'
+							});
+						}else if(data.status == -2){
+							//修改失败
+							//显示消息提示框
+							messageDialog = yui.messageDialog('body',{
+								text: '保存失败'
+							});
+						}
+					},
+					error: function(jqXHR, status, error){
+						if(status == 'abort'){
+							return;
+						}
+						
+						//移除加载提示框
+						loadingDialog.hidden();
+						
+						//显示消息提示框
+						messageDialog = yui.messageDialog('body',{
+							text: '请求失败'
+						});
+					}
+				});
+			});
+		}
+		
+		//基本信息
+		$('#person-base-info').click(function(e) {
+			//终止上一个请求
+			if(isRequest){
+				isRequest.abort();
+			}
+			
+			//移除上一个加载提示框
+			if(loadingDialog){
+				loadingDialog.remove();
+			}
+			
+			//移除上一个消息提示框
+			if(messageDialog){
+				messageDialog.remove();
+			}
+			
+			//显示新的加载提示框
+			loadingDialog = yui.loadingDialog('body');
+			
+            //Ajax请求基本信息页面
+			var sendData = {"q":"zero/person/getBaseInfo"};
+			isRequest = $.ajax({
+				url: webDName + webRoot +'/index.php',
+				type: 'POST',
+				data: sendData,
+				dataType: "json",
+				success: function(data, status){
+					//移除加载提示框
+					loadingDialog.hidden();
+					
+					if(data.status == 0){
+						//获取成功
+						$('#person-right').html(data.content);
+						
+						//绑定保存个人基本信息事
+						bindSaveInfo();
+					}else{
+						//获取失败
+						//显示消息提示框
+						messageDialog = yui.messageDialog('body',{
+							text: '加载失败'
+						});
+					}
+				},
+				error: function(jqXHR, status, error){					
+					//用户终止上一个请求的错误
+					if(status == 'abort'){
+						return;
+					}
+					
+					//其他错误
+					//移除加载提示框
+					loadingDialog.hidden();
+					
+					//显示消息提示框
+					messageDialog = yui.messageDialog('body',{
+						text: '请求出错'
+					});
+				}
+			});
+        });
+		
+		//绑定保存修改密码事件
+		function bindSavePassword(){
+			$('#btn-save-password').click(function(e) {
+				var oldPassword = $('#old-password');
+				var newPassword1 = $('#new-password-1');
+				var newPassword2 = $('#new-password-2');
+				
+				//终止上一个Ajax请求
+				if(isRequest){
+					isRequest.abort();
+				}
+				
+				//移除上一个消息提示框
+				if(messageDialog){
+					messageDialog.remove();
+				}
+				
+				//移除上一个加载提示框
+				if(loadingDialog){
+					loadingDialog.remove();
+				}
+				
+				//检测密码有效性
+				var pwd = new RegExp('[A-Za-z0-9+-/*_]*', 'g');
+				var pwd1 = oldPassword.val();
+				var pwd2 = newPassword1.val();
+				var pwd3 = newPassword2.val();
+				if(!pwd.test(pwd2) || $.trim(pwd1).length == 0 || $.trim(pwd2).length == 0 || $.trim(pwd3).length == 0){
+					messageDialog = yui.messageDialog('body',{
+						text: '密码无效'
+					});
+					return;
+				}else if(pwd2 != pwd3){
+					messageDialog = yui.messageDialog('body',{
+						text: '新密码不一致'
+					});
+					
+					return;
+				}else if(pwd2.length < 6 || pwd3.length > 20){
+					messageDialog = yui.messageDialog('body',{
+						text: '密码长度 6~20 位'
+					});
+					
+					return;
+				}
+				
+				//显示加载提示框
+				loadingDialog = yui.loadingDialog('body');
+				
+				//发送修改请求
+				var sendData = {
+									"q":"zero/person/savePassword",
+									"oldPwd": pwd1,
+									"newPwd": pwd2
+								};
+				isRequest = $.ajax({
+					url: webDName + webRoot +'/index.php',
+					type: 'POST',
+					data: sendData,
+					dataType: "json",
+					success: function(data, status){
+						//移除加载提示框
+						loadingDialog.hidden();
+						
+						if(data.status == 0){
+							//修改成功
+							messageDialog = yui.messageDialog('body',{
+								text: '保存成功'
+							});
+						}else if(data.status == -1){
+							//未登录
+							messageDialog = yui.messageDialog('body',{
+								text: '请先登录'
+							});
+						}else if(data.status == -2){
+							//旧密码错误
+							messageDialog = yui.messageDialog('body',{
+								text: '旧密码有误'
+							});
+						}else if(data.status == -3){
+							//修改失败
+							messageDialog = yui.messageDialog('body',{
+								text: '保存失败'
+							});
+						}
+					},
+					error: function(jqXHR, status, error){
+						if(status == 'abort'){
+							return;
+						}
+						
+						//移除加载提示框
+						loadingDialog.hidden();
+						
+						//显示消息提示框
+						messageDialog = yui.messageDialog('body',{
+							text: '请求失败'
+						});
+					}
+				});
+			});
+		}
+		
+		//密码修改
+		$('#person-pwd-update').click(function(e) {
+			//终止之前所有请求
+			if(isRequest != null){
+				isRequest.abort();
+			}
+			
+			//移除上一个加载提示框
+			if(loadingDialog){
+				loadingDialog.remove();
+			}
+			
+			//移除上一个消息提示框
+			if(messageDialog){
+				messageDialog.remove();
+			}
+			
+			//显示新的加载提示框
+			loadingDialog = yui.loadingDialog('body');
+			
+            //Ajax请求密码修改页面
+			var sendData = {"q":"zero/person/getPasswordUpdate"};
+			isRequest = $.ajax({
+				url: webDName + webRoot +'/index.php',
+				type: 'POST',
+				data: sendData,
+				dataType: "json",
+				success: function(data, status){
+					//移除加载提示框
+					loadingDialog.hidden();
+					
+					if(data.status == 0){
+						//获取成功
+						$('#person-right').html(data.content);
+						
+						//绑定保存修改密码事件
+						bindSavePassword();
+					}else{
+						//获取失败
+						//显示消息提示框
+						messageDialog = yui.messageDialog('body',{
+							text: '加载失败'
+						});
+					}
+				},
+				error: function(jqXHR, status, error){
+					//用户终止上一个请求
+					if(status == 'abort'){
+						return;
+					}
+					
+					//移除加载提示框
+					loadingDialog.hidden();
+					
+					//显示消息提示框
+					messageDialog = yui.messageDialog('body',{
+						text: '请求出错'
+					});
+				}
+			});
         });
 	}
 }

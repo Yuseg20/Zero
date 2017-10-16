@@ -1,0 +1,47 @@
+
+<!-- 页脚 -->
+<div id="footer">
+    <!-- 居中容器 -->
+    <div class="center-container">
+        <p class="intro"><?php echo $this -> get('webIntro'); ?></p>
+        <p class="copyright"><?php echo $this -> get('webCopyright'); ?></p>
+    </div>
+</div>
+
+<!-- 组件 -->
+<div id="com">
+    <!-- 背景 -->
+    <div class="bg">
+    </div>
+
+    <!-- 登录/注册组件 -->
+    <div class="login">
+        <!-- 标题栏 -->
+        <div class="title-bar">
+            <a id="a-login-selection" class="a-login" href="" >登录</a>
+            <a id="a-reg-selection" class="a-register" href="">注册</a>
+        </div>
+        
+        <!-- 登录控件容器 -->
+        <div id="login-container" class="login-container main-container">
+            <ul>
+                <li><span id="login-hint" class="hint"></span></li>
+                <li><input id="login-txt-username" type="text" placeholder="用户名" autofocus /></li>
+                <li><input id="login-txt-password" type="password" placeholder="密码" /></li>
+                <li><button id="btn-login">登&nbsp;&nbsp;&nbsp;&nbsp;录</button></li>
+            </ul>
+        </div>
+        
+        <!-- 注册控件容器 -->
+        <div id="reg-container" class="reg-container main-container">
+            <ul>
+                <li><span id="reg-hint" class="hint"></span></li>
+                <li><input id="reg-txt-username" type="text" placeholder="用户名" /></li>
+                <li><input id="reg-txt-nickname" type="text" placeholder="昵称" /></li>
+                <li><input id="reg-txt-password" type="password" placeholder="密码" /></li>
+                <li><input id="reg-txt-re-password" type="password" placeholder="重复密码" /></li>
+                <li><button id="btn-now-register">立即注册</button></li>
+            </ul>
+        </div>
+    </div>
+</div>

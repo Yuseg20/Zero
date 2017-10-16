@@ -1,0 +1,42 @@
+<?php
+	//--- 获取渲染参数 ---
+	$askList = $this -> get('ask-list');
+?>
+
+<!-- 我的提问 -->
+<div class="my-ask">
+    <!-- 标题栏 -->
+    <div class="title-bar">
+        <h3>我的提问</h3>
+        <button id="btn-ask" class="btn-ask">我要提问</button>
+    </div>
+    <!-- 内容 -->
+    <div class="content">
+        <ul class="ul-question">
+        	<?php for($i=0;$i<count($askList);$i++){ ?>
+            <li>
+            	<a href="?q=zero/article/article&aid=<?php echo $askList[$i]['askId']; ?>" target="_blank">
+                <?php echo $askList[$i]['title']; ?>
+                </a>
+                &nbsp;<?php echo $askList[$i]['answers']; ?>&nbsp;回答
+            </li>
+            <?php } ?>
+            
+            <!--
+            <li><a href="">PHP 是什么？666</a>&nbsp;0&nbsp;回答</li>
+            <li><a href="">Android 环境搭建？</a>&nbsp;0&nbsp;回答</li>
+            <li><a href="">Java 环境搭建？</a>&nbsp;0&nbsp;回答</li>
+            <li><a href="">PHP 是什么？</a>&nbsp;0&nbsp;回答</li>
+            <li><a href="">Android 环境搭建？</a>&nbsp;0&nbsp;回答</li>
+            <li><a href="">Java 环境搭建？</a>&nbsp;0&nbsp;回答</li>
+            <li><a href="">PHP 是什么？</a>&nbsp;0&nbsp;回答</li>
+            <li><a href="">Android 环境搭建？</a>&nbsp;0&nbsp;回答</li>
+            <li><a href="">Java 环境搭建？</a>&nbsp;0&nbsp;回答</li>
+            <li><a href="">PHP 是什么？</a>&nbsp;0&nbsp;回答</li>
+            <li><a href="">Android 环境搭建？</a>&nbsp;0&nbsp;回答</li>
+            <li><a href="">Android 环境搭建？</a>&nbsp;0&nbsp;回答</li>
+            -->
+        </ul>
+        <p class="load-more"><a href="javascript:void(0);">加载更多</a></p>
+    </div>
+</div>

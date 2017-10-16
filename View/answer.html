@@ -1,0 +1,38 @@
+<?php
+	//--- 获取渲染参数 ---
+    $answerList = $this -> get('answer-list');
+?>
+
+<!-- 我的回答 -->
+<div class="my-answer">
+    <!-- 标题栏 -->
+    <div class="title-bar">
+        <h3>我的回答</h3>
+    </div>
+    <!-- 内容 -->
+    <div class="content">
+        <ul>
+        	<?php for($i=0;$i<count($answerList);$i++){ ?>
+            <li>
+            	<a href="?q=zero/article/article&aid=<?php echo $answerList[$i]['askId'] ?>" target="_blank">
+            	<?php echo $answerList[$i]['title']; ?>
+                </a>
+            </li>
+            <?php } ?>
+            
+            <!--
+            <li><a href=""></a></li>
+            <li><a href="">Android 环境搭建？</a></li>
+            <li><a href="">Java 环境搭建？</a></li>
+            <li><a href="">PHP 是什么？</a></li>
+            <li><a href="">Android 环境搭建？</a></li>
+            <li><a href="">Java 环境搭建？</a></li>
+            <li><a href="">PHP 是什么？</a></li>
+            <li><a href="">Android 环境搭建？</a></li>
+            <li><a href="">Java 环境搭建？</a></li>
+            <li><a href="">PHP 是什么？</a></li>
+            -->
+        </ul>
+        <p class="load-more"><a href="">加载更多</a></p>
+    </div>
+</div>

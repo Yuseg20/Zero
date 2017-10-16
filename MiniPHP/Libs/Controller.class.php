@@ -4,8 +4,8 @@
 
 abstract class Controller{
 
-	protected $data = [];//页面渲染的数据数组
-	protected $jsonData = [];//json数组
+	protected $data = array();//页面渲染的数据数组
+	protected $jsonData = array();//json数组
 
 	//构造方法
 	function __construct(){
@@ -30,15 +30,14 @@ abstract class Controller{
 	//页面渲染
 	function display($viewFile = 'index.html'){
 		//读取文件内容
-		$content = file_get_contents(Config::get('path.view_path').$viewFile);
+		$content = file_get_contents(Config::get('path.view').$viewFile);
 		//检测文件UTF8编码头BOM
-		if(substr($content, 0, 3) == pack('C3', 0xEF, 0xBB, 0xBF)){
+		if(substr($content, 0, 3) == pack('CCC', 0xEF, 0xBB, 0xBF)){
 			//去除BOM头
-			file_put_contents(Config::get('path.view_path').$viewFile, substr($content, 3));
-			echo "去除BOM头";
+			file_put_contents(Config::get('path.view').$viewFile, substr($content, 3));
 		}
 		//页面渲染
-		include_once Config::get('path.view_path').$viewFile;
+		include_once Config::get('path.view').$viewFile;
 	}
 
 	//请求拦截
@@ -111,5 +110,35 @@ abstract class Controller{
 		}else{
 			echo $data;
 		}
+	}
+
+	//获取页面渲染结果
+	function getXView($viewfile = ''){
+		if(empty($viewfile)){
+			return;
+		}
+
+		//读取文件内容
+		$content = file_get_contents(Config::get('path.view').$viewfile);
+		//检测文件UTF8编码头BOM
+		if(substr($content, 0, 3) == pack('CCC', 0xEF, 0xBB, 0xBF)){
+			//去除BOM头
+			file_put_contents(Config::get('path.view').$viewfile, substr($content, 3));
+		}
+
+		//---开启ob缓存---
+		ob_start();
+
+		//包含文件，并执行内部脚本
+		include_once Config::get('path.view').$viewfile;
+
+		//获取脚本执行的缓存内容,并清除缓存
+		$ob_content = ob_get_contents();
+
+		//---清空并关闭ob缓存---
+		ob_end_clean();
+
+		//返回缓存内容
+		return $ob_content;
 	}
 }
