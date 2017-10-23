@@ -1,0 +1,20 @@
+<?php
+	//--- 获取渲染参数 ---
+    $webDName = $this -> get('webDName');
+    $webRoot = $this -> get('webRoot');
+    $answerList = $this -> get('answer-list');
+?>
+
+<!-- 回答列表 -->
+<?php for($i=0;$i<count($answerList);$i++){ ?>
+<li class="li-answer">
+    <!-- 回答者信息 -->
+    <div class="answer-info">
+        <img class="avatar" src="<?php echo $webDName.$webRoot.$answerList[$i]['avatar']; ?>" />
+        <span class="nickname"><?php echo $answerList[$i]['nickname']; ?></span>
+        <span class="pub-time"><?php echo $answerList[$i]['pubtime']; ?></span>
+    </div>
+    <!-- 回答内容 -->
+    <div class="answer-content"><?php echo $answerList[$i]['content']; ?></div>
+</li>
+<?php } ?>

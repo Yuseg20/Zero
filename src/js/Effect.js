@@ -166,7 +166,11 @@ function Effect(){
 	
 	//内容页回答编辑器
 	this.articlePageEdit = function(){
-		var ue = UE.getEditor('my-answer-edit',{
+		ue = UE.getEditor('my-answer-edit',{
+			initialFrameWidth:780,
+			initialFrameHeight:300,
+			autoHeightEnabled:false,//长文本使用滚动条
+			enableAutoSave:false,//本地自动保存功能
 			toolbars: [
 				[
 					'undo', //撤销

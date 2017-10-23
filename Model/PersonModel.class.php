@@ -10,11 +10,16 @@
 				return;
 			}
 
+			//参数过滤[防SQL注入]
+			$user = addslashes($user);
+
 			//创建数据库对象
 			$pdo = new MiniPDO();
 
 			//查询用户信息
-			$sql = "select ui_nickname,ui_avatar,ui_reg_time from user_info where ua_user=:user";
+			$sql = "SELECT ua_user,ui_nickname,ui_avatar,ui_reg_time
+					FROM user_info
+					WHERE ua_user=:user";
 			$params = array(
 				'user' => $user
 			);
@@ -24,7 +29,7 @@
 			$pdo -> close();
 
 			//存储配置
-			$this -> person['user'] = $user;
+			$this -> person['user'] = $arr[0]['ua_user'];
 			$this -> person['avatar'] = $arr[0]['ui_avatar'];
 			$this -> person['nickname'] = $arr[0]['ui_nickname'];
 			$this -> person['regtime'] = $arr[0]['ui_reg_time'];
@@ -72,6 +77,10 @@
 				return false;
 			}
 
+			//参数过滤[防SQL注入]
+			$user = addslashes($user);
+			$nickname = addslashes($nickname);
+
 			//创建数据库对象
 			$pdo = new MiniPDO();
 
@@ -93,6 +102,9 @@
 			if(empty($user) || empty($oldPwd) || empty($newPwd)){
 				return false;
 			}
+
+			//参数过滤[防SQL注入]
+			$user = addslashes($user);
 
 			//创建数据库对象
 			$pdo = new MiniPDO();

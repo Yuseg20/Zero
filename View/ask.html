@@ -12,7 +12,7 @@
     </div>
     <!-- 内容 -->
     <div class="content">
-        <ul class="ul-question">
+        <ul id="ask-list" class="ul-question">
         	<?php for($i=0;$i<count($askList);$i++){ ?>
             <li>
             	<a href="?q=zero/article/article&aid=<?php echo $askList[$i]['askId']; ?>" target="_blank">
@@ -21,22 +21,9 @@
                 &nbsp;<?php echo $askList[$i]['answers']; ?>&nbsp;回答
             </li>
             <?php } ?>
-            
-            <!--
-            <li><a href="">PHP 是什么？666</a>&nbsp;0&nbsp;回答</li>
-            <li><a href="">Android 环境搭建？</a>&nbsp;0&nbsp;回答</li>
-            <li><a href="">Java 环境搭建？</a>&nbsp;0&nbsp;回答</li>
-            <li><a href="">PHP 是什么？</a>&nbsp;0&nbsp;回答</li>
-            <li><a href="">Android 环境搭建？</a>&nbsp;0&nbsp;回答</li>
-            <li><a href="">Java 环境搭建？</a>&nbsp;0&nbsp;回答</li>
-            <li><a href="">PHP 是什么？</a>&nbsp;0&nbsp;回答</li>
-            <li><a href="">Android 环境搭建？</a>&nbsp;0&nbsp;回答</li>
-            <li><a href="">Java 环境搭建？</a>&nbsp;0&nbsp;回答</li>
-            <li><a href="">PHP 是什么？</a>&nbsp;0&nbsp;回答</li>
-            <li><a href="">Android 环境搭建？</a>&nbsp;0&nbsp;回答</li>
-            <li><a href="">Android 环境搭建？</a>&nbsp;0&nbsp;回答</li>
-            -->
         </ul>
-        <p class="load-more"><a href="javascript:void(0);">加载更多</a></p>
+        <!-- 分页按钮 -->
+        <div id="paging" style="text-align:center;padding:10px 0 0 0;">
+        </div>
     </div>
 </div>

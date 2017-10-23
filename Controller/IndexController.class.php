@@ -6,6 +6,8 @@
 		public function index(){
 			//------业务处理------
 			$webConfig = new WebConfigModel();//网站配置
+			$article = new ArticleModel();
+			$answer = new AnswerModel();
 			$logout = 'block';//注销状态
 			$logined = 'none';//登录状态
 
@@ -25,6 +27,8 @@
 			$this -> set('logout', $logout);//注销状态标志
 			$this -> set('logined', $logined);//登录状态标志
 			$this -> set('index-target', '');//设置首页跳转方式
+			$this -> set('newestAskList', $article -> getNewestAskList(0, 12));//最新问题列表
+			$this -> set('newestAnswerList', $answer -> getNewestAnswerList(0, 12));//最新回答列表
 
 			//------页面渲染------
 			$this -> display('main.html');

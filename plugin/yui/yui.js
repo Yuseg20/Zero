@@ -206,4 +206,286 @@ function YUI(pluginRoot){
 		//返回操作标志
 		return $container;
 	}
+	
+	//分页组件
+	this.paging = function(selector, params){
+		//------ 检测参数 ------
+		if(!params || params.pagesize == 0){
+			//无参数则返回
+			return;
+		}
+		
+		//------ 获取参数 ------
+		var pagesize = params.pagesize;//总页数
+		var prevEvent = params.prev ? params.prev : null;//上一页点击绑定对象
+		var pageEvent = params.page ? params.page : null;//页码点击绑定对象
+		var nextEvent = params.next ? params.next : null;//下一页点击绑定对象
+		
+		//------ 声明变量 ------
+		var currentPage = 1;//当前页码
+		var index = 0;//当前页码索引
+		var pageNumStart = 0;//循环页码起始
+		
+		//------ 创建节点元素 ------
+		var $ul = $('<ul></ul>');
+		var $liPrev = $('<a href="javascript:void(0);" style="color:#999;"><li style="list-style-type:none">上一页</li></a>');
+		var $liNext = $('<a href="javascript:void(0);" style="color:#999;"><li style="list-style-type:none">下一页</li></a>');
+
+		//------ 初始化页码 ------
+		var $liPages = new Array();
+		var pageForStart = 0
+		var pageForEnd = pagesize < 3 ? pagesize : 3;
+		for(var i=pageForStart;i<pageForEnd;i++){
+			var $liPage = $('<a href="javascript:void(0);" style="color:#999;"><li style="list-style-type:none">'+ (i+1) +'</li></a>');
+			var color = '#999';
+			var borderColor = '#999';
+			var background = '#FFF';
+			
+			if((i+1) == currentPage){
+				//激活当前页码显示状态
+				color = '#FFF';
+				borderColor = '#009966';
+				background = '#009966';
+			}
+			
+			$liPage.css({
+				'display':'inline-block',
+				'color':color,
+				'font-size':'12px',
+				'text-align':'center',
+				'border':'1px solid '+ borderColor,
+				'border-radius':'2px',
+				'padding':'5px 10px',
+				'margin':'0 0 0 5px',
+				'background':background
+			});
+			$liPage.hover(function(){
+				//鼠标移入
+				if($(this).text() == currentPage) return;
+				$(this).css({
+					'color':'#009966',
+					'border':'1px solid #009966',
+					'background':'#FFF'
+				});
+			},function(){
+				//鼠标移出
+				if($(this).text() == currentPage) return;
+				$(this).css({
+					'color':'#999',
+					'border':'1px solid #999',
+					'background':'#FFF'
+				});
+			});
+			
+			$liPages[i] = $liPage;
+			$liPages[i].appendTo($ul);
+		}
+		
+		//------ 样式 ------
+		
+		//组件容器
+		$ul.css({
+			'height':'30px',
+			'margin':'0 auto'
+		});
+		
+		//上一页
+		$liPrev.css({
+			'display':'inline-block',
+			'color':'#999',
+			'font-size':'12px',
+			'text-align':'center',
+			'border':'1px solid #999',
+			'border-radius':'2px',
+			'padding':'5px 12px',
+			'background':'#FFF'
+		});
+		$liPrev.hover(function(){
+			//鼠标移入
+			$(this).css({
+				'color':'#009966',
+				'border':'1px solid #009966',
+				'background':'#FFF'
+			});
+		},function(){
+			//鼠标移出
+			$(this).css({
+				'color':'#999',
+				'border':'1px solid #999',
+				'background':'#FFF'
+			});
+		});
+		
+		//下一页
+		$liNext.css({
+			'display':'inline-block',
+			'color':'#999',
+			'font-size':'12px',
+			'text-align':'center',
+			'border':'1px solid #999',
+			'border-radius':'2px',
+			'padding':'5px 12px',
+			'margin':'0 0 0 5px',
+			'background':'#FFF'
+		});
+		$liNext.hover(function(){
+			//鼠标移入
+			$(this).css({
+				'color':'#009966',
+				'border':'1px solid #009966',
+				'background':'#FFF'
+			});
+		},function(){
+			//鼠标移出
+			$(this).css({
+				'color':'#999',
+				'border':'1px solid #999',
+				'background':'#FFF'
+			});
+		});
+		
+		//------ 组件效果 ------
+		
+		//上一页效果
+		function prevPage(){
+			if(currentPage > 1) currentPage--;//当前页码
+			if(currentPage > 2) pageNumStart = currentPage-2; else pageNumStart = 0;//循环页码起始
+				
+			if(currentPage == 1){
+				//当前页为首页
+				index = 0;
+			}else if(currentPage > 1){
+				//当前页大于 1 ，则激活状态为中间页码
+				index = 1;
+			}
+			
+			for(var i=0;i<$liPages.length;i++){
+				pageNumStart++;
+				$liPages[i].text(pageNumStart);
+				
+				//重置所有页码样式
+				$liPages[i].css({
+					'color':'#999',
+					'border':'1px solid #999',
+					'background':'#FFF'
+				});
+			}
+			//切换预加载页码样式
+			$liPages[index].css({
+				'color':'#FFF',
+				'border':'1px solid #009966',
+				'background':'#009966'
+			});
+		}
+		
+		//页码效果
+		function numPage(params){
+			currentPage = params.pageNum;//当前页
+			index = params.currentIndex;//当前页索引
+			pageNumStart = pagesize <= 3 ? 0 : currentPage-2;//循环页码起始
+			
+			for(var i=0;i<$liPages.length;i++){
+				pageNumStart++;
+				$liPages[i].text(pageNumStart);
+
+				//重置所有页码样式
+				$liPages[i].css({
+					'color':'#999',
+					'border':'1px solid #999',
+					'background':'#FFF'
+				});
+			}
+			//切换预加载页码样式
+			$liPages[index].css({
+				'color':'#FFF',
+				'border':'1px solid #009966',
+				'background':'#009966'
+			});
+		}
+		
+		//下一页效果
+		function nextPage(){
+			if(currentPage < pagesize) currentPage++;//当前页码
+			pageNumStart = pagesize <= 3 ? 0 : currentPage-2;//循环页码起始
+			
+			if(currentPage == pagesize){
+				index = $liPages.length-1;//当前页为尾页
+			}else if(currentPage < pagesize){
+				//中间页
+				index = Math.floor($liPages.length/2);
+			}
+			
+			for(var i=0;i<$liPages.length;i++){
+				pageNumStart++;
+				$liPages[i].text(pageNumStart);
+
+				//重置所有页码样式
+				$liPages[i].css({
+					'color':'#999',
+					'border':'1px solid #999',
+					'background':'#FFF'
+				});
+			}
+			//切换预加载页码样式
+			$liPages[index].css({
+				'color':'#FFF',
+				'border':'1px solid #009966',
+				'background':'#009966'
+			});
+		}
+		
+		//------ 绑定事件 ------
+		
+		//页码点击事件
+		for(var i=0;i<$liPages.length;i++){
+			$liPages[i].attr('index', i);
+			$liPages[i].click(function(e){
+				//调用页码效果
+				numPage({
+					pageNum:parseInt($(this).text()),
+					currentIndex:parseInt($(this).attr('index'))
+				});
+				if(pageEvent){
+					pageEvent({
+						current:currentPage
+					});
+				}
+			});
+		}
+
+		//上一页点击事件
+		$liPrev.click(function(e){
+			prevPage();
+			if(prevEvent){
+				prevEvent({
+					current:currentPage
+				});
+			}
+		});
+		
+		//下一页点击事件
+		$liNext.click(function(e){
+			nextPage();
+			if(nextEvent){
+				nextEvent({
+					current:currentPage
+				});
+			}
+		});
+		
+		//------ 组装 ------
+		$liPrev.prependTo($ul);
+		$liNext.appendTo($ul);
+		
+		//a 连接
+		$ul.find('a').css({
+			'text-decoration':'none'
+		});
+		
+		//------ 渲染 ------
+		$(selector).append($ul);
+		
+		//------ 返回句柄 ------
+		
+	}
 }

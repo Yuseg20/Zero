@@ -12,6 +12,9 @@ abstract class Controller{
 		//载入配置
 		Config::load('config');
 
+		//设置脚本执行时间
+		set_time_limit(Config::get('system.xtime'));
+
 		//自定义Session
 		new Session();
 		//启动Session

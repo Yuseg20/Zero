@@ -765,24 +765,24 @@ li{
 }
 
 /* 左侧-回答信息-列表项 */
-#article-main .container-1 .left .answer ul li{
+#article-main .container-1 .left .answer ul .li-answer{
 	width:100%;
 	height:auto;
 	border-bottom:1px dashed #AAA;
-	padding:25px 0 10px 0;
+	padding:25px 0;
 	overflow:hidden;
 	/*background:#9FC;*/
 }
 
 /* 左侧-回答信息-列表项-头像 */
-#article-main .container-1 .left .answer ul li .answer-info .avatar{
+#article-main .container-1 .left .answer ul .li-answer .answer-info .avatar{
 	width:48px;
 	vertical-align:middle;
 	border-radius:50%;
 }
 
 /* 左侧-回答信息-列表项-昵称 */
-#article-main .container-1 .left .answer ul li .answer-info .nickname{
+#article-main .container-1 .left .answer ul .li-answer .answer-info .nickname{
 	color:#009966;
 	font-size:14px;
 	vertical-align:middle;
@@ -790,20 +790,20 @@ li{
 }
 
 /* 左侧-回答信息-列表项-时间 */
-#article-main .container-1 .left .answer ul li .answer-info .pub-time{
+#article-main .container-1 .left .answer ul .li-answer .answer-info .pub-time{
 	color:#777;
 	font-size:12px;
 	float:right;
 }
 
 /* 左侧-回答内容 */
-#article-main .container-1 .left .answer ul li .answer-content{
+#article-main .container-1 .left .answer ul .li-answer .answer-content{
 	width:680px;
 	margin:10px auto 0 auto;
 }
 
 /* 左侧-回答评价 */
-#article-main .container-1 .left .answer ul li .answer-estimate{
+#article-main .container-1 .left .answer ul .li-answer .answer-estimate{
 	display:inline;
 	font-size:10px;
 	float:right;
@@ -811,30 +811,10 @@ li{
 	/*background:#CC3;*/
 }
 
-/* 左侧-回答评价-支持/反对 */
-#article-main .container-1 .left .answer ul li .answer-estimate a:link,#article-main .container-1 .left .answer ul li .answer-estimate a:visited{
-	font-size:10px;
-}
-
-#article-main .container-1 .left .answer ul li .answer-estimate a:hover{
-	color:#009966;
-	text-decoration:underline;
-}
-
 /* 加载更多 */
 #article-main .container-1 .left .load-more{
 	text-align:center;
 	margin:10px 0 0 0;
-}
-
-/* 加载更多-超链接 */
-#article-main .container-1 .left .load-more a:link,#article-main .container-1 .left .load-more a:visited{
-	font-size:14px;
-}
-
-#article-main .container-1 .left .load-more a:hover{
-	color:#009966;
-	text-decoration:underline;
 }
 
 /* 我来回答-标题 */

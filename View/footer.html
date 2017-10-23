@@ -1,10 +1,15 @@
+<?php
+	//--- 获取渲染参数 ---
+    $webIntro = $this -> get('webIntro');
+    $webCopyright = $this -> get('webCopyright');
+?>
 
 <!-- 页脚 -->
 <div id="footer">
     <!-- 居中容器 -->
     <div class="center-container">
-        <p class="intro"><?php echo $this -> get('webIntro'); ?></p>
-        <p class="copyright"><?php echo $this -> get('webCopyright'); ?></p>
+        <p class="intro"><?php echo $webIntro; ?></p>
+        <p class="copyright"><?php echo $webCopyright; ?></p>
     </div>
 </div>
 

@@ -11,6 +11,9 @@
 			if(empty($user)){
 				return -1;
 			}
+
+			//参数过滤[防SQL注入]
+			$user = addslashes($user);
 			
 			//创建数据库对象
 			$pdo = new MiniPDO();
@@ -38,6 +41,11 @@
 			if(empty($user) || empty($pwd)){
 				return -1;
 			}
+
+			//参数过滤[防SQL注入]
+			$user = addslashes($user);
+			$pwd = addslashes($pwd);
+			$nickname = addslashes($nickname);
 
 			//创建数据库对象
 			$pdo = new MiniPDO();
@@ -75,6 +83,9 @@
 			if(empty($user)){
 				return -1;
 			}
+
+			//参数过滤[防SQL注入]
+			$user = addslashes($user);
 
 			//创建数据库对象
 			$pdo = new MiniPDO();

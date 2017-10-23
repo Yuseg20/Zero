@@ -54,6 +54,52 @@
 			//------初始化响应数据------
 			$type = 'get_my_ask';
 			$status = 0;
+			$pagesize = 0;
+			$content = '';
+
+			//------业务处理------
+			if(!empty($_SESSION['logined_user'])){
+				//已登录
+				$article = new ArticleModel();
+				//获取用户名提问列表页数
+				$pagesize = $article -> getAskPages($_SESSION['logined_user']);
+				//获取用户名提问列表
+				$askList = $article -> getAskList($_SESSION['logined_user'], 0, 12);
+
+				//------设置渲染数据------
+				$this -> set('ask-list', $askList);
+
+				//获取渲染后的页面
+				$content = $this -> getXView('ask.html');
+			}else{
+				//未登录
+				$status = -1;
+			}
+
+			//------设置响应数据------
+			$this -> setJson('type', $type);
+			$this -> setJson('status', $status);
+			$this -> setJson('pagesize', $pagesize);
+			$this -> setJson('content', $content);
+
+			//------发送响应数据------
+			$this -> response();
+		}
+
+		//获取我的提问列表
+		public function getMyAskList(){
+			//------设置请求方式------
+			$this -> request('post');
+
+			//------设置响应数据格式------
+			$this -> format('json');
+
+			//------获取请求数据------
+			$page = $_POST['page'];
+
+			//------初始化响应数据------
+			$type = 'get_my_ask_list';
+			$status = 0;
 			$content = '';
 
 			//------业务处理------
@@ -61,7 +107,7 @@
 				//已登录
 				$article = new ArticleModel();
 				//获取用户名提问列表
-				$askList = $article -> getAskList($_SESSION['logined_user'], 0, 12);
+				$askList = $article -> getAskList($_SESSION['logined_user'], ($page-1)*12, 12);
 
 				// 0 记录数据匹配
 				for($i=0;$i<count($askList);$i++){
@@ -74,7 +120,7 @@
 				$this -> set('ask-list', $askList);
 
 				//获取渲染后的页面
-				$content = $this -> getXView('ask.html');
+				$content = $this -> getXView('ask-list.html');
 			}else{
 				//未登录
 				$status = -1;
@@ -173,12 +219,15 @@
 			//------初始化响应数据------
 			$type = 'get_my_answer';
 			$status = 0;
+			$pagesize = 0;
 			$content = '';
 
 			//------业务处理------
 			if(!empty($_SESSION['logined_user'])){
 				//已登录
 				$article = new ArticleModel();
+				//获取用户名提问列表页数
+				$pagesize = ceil($article -> getAnswerPages($_SESSION['logined_user'])/12);
 				//获取用户名提问列表
 				$answerList = $article -> getAnswerList($_SESSION['logined_user'], 0, 12);
 
@@ -187,6 +236,49 @@
 
 				//获取渲染后的页面
 				$content = $this -> getXView('answer.html');
+			}else{
+				//未登录
+				$status = -1;
+			}
+
+			//------设置响应数据------
+			$this -> setJson('type', $type);
+			$this -> setJson('status', $status);
+			$this -> setJson('pagesize', $pagesize);
+			$this -> setJson('content', $content);
+
+			//------发送响应数据------
+			$this -> response();
+		}
+
+		//获取我的回答列表
+		public function getMyAnswerList(){
+			//------设置请求方式------
+			$this -> request('post');
+
+			//------设置响应数据格式------
+			$this -> format('json');
+
+			//------获取请求数据------
+			$page = $_POST['page'];
+
+			//------初始化响应数据------
+			$type = 'get_my_answer_list';
+			$status = 0;
+			$content = '';
+
+			//------业务处理------
+			if(!empty($_SESSION['logined_user'])){
+				//已登录
+				$article = new ArticleModel();
+				//获取用户名提问列表
+				$answerList = $article -> getAnswerList($_SESSION['logined_user'], ($page-1)*12, 12);
+
+				//------设置渲染数据------
+				$this -> set('answer-list', $answerList);
+
+				//获取渲染后的页面
+				$content = $this -> getXView('answer-list.html');
 			}else{
 				//未登录
 				$status = -1;

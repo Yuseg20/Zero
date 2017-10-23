@@ -11,12 +11,14 @@ return array(
 	/* 目录配置 */
 	"path" => array(
 		"view"   => PLAT_PATH."View/",//视图模板路径
-		"avatar" => "/src/images/avatar.jpg"//默认头像路径
+		"avatar" => "/src/images/avatar.jpg",//默认头像路径
+		"answer" => "/answer"//回答文档路径
 	),
 
 	/* 系统配置 */
 	"system" =>array(
-		"timezone" => "PRC"//时区设置,PRC(中华人民共和国)
+		"timezone" => "PRC",//时区设置,PRC(中华人民共和国)
+		"xtime"    => 0 //脚本执行时间
 	),
 
 	/* MySQL 数据库配置 */

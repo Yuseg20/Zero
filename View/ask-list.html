@@ -1,0 +1,14 @@
+<?php
+	//--- 获取渲染参数 ---
+	$askList = $this -> get('ask-list');
+?>
+
+<!-- 我的提问列表 -->
+<?php for($i=0;$i<count($askList);$i++){ ?>
+<li>
+    <a href="?q=zero/article/article&aid=<?php echo $askList[$i]['askId']; ?>" target="_blank">
+    <?php echo $askList[$i]['title']; ?>
+    </a>
+    &nbsp;<?php echo $askList[$i]['answers']; ?>&nbsp;回答
+</li>
+<?php } ?>

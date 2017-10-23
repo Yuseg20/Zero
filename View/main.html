@@ -1,22 +1,30 @@
+<?php
+	//--- 获取渲染参数 ---
+    $webDName = $this -> get('webDName');
+    $webRoot = $this -> get('webRoot');
+    $newestAskList = $this ->get('newestAskList');
+    $newestAnswerList = $this -> get('newestAnswerList');
+?>
+
 <!doctype html>
 <html>
 <head>
 <title>Zero</title>
 <meta charset="utf-8" />
-<link type="text/css" rel="stylesheet" href="<?php echo $this -> get('webDName').$this -> get('webRoot'); ?>/src/css/style.css" /><!-- 公共样式库 -->
-<link type="text/css" rel="stylesheet" href="<?php echo $this -> get('webDName').$this -> get('webRoot'); ?>/src/css/ui.css" /><!-- 组件样式库 -->
-<script type="text/javascript" src="<?php echo $this -> get('webDName').$this -> get('webRoot'); ?>/src/js/jquery-1.8.0.min.js"></script><!-- jQuery 核心库 -->
-<script type="text/javascript" src="<?php echo $this -> get('webDName').$this -> get('webRoot'); ?>/src/js/jquery.animate-shadow.js"></script><!-- jQuery 阴影动画插件 -->
-<script type="text/javascript" src="<?php echo $this -> get('webDName').$this -> get('webRoot'); ?>/plugin/yui/yui.js"></script>
-<script type="text/javascript" src="<?php echo $this -> get('webDName').$this -> get('webRoot'); ?>/src/js/Effect.js"></script>
-<script type="text/javascript" src="<?php echo $this -> get('webDName').$this -> get('webRoot'); ?>/src/js/Processor.js"></script><!-- 处理器 -->
+<link type="text/css" rel="stylesheet" href="<?php echo $webDName.$webRoot; ?>/src/css/style.css" /><!-- 公共样式库 -->
+<link type="text/css" rel="stylesheet" href="<?php echo $webDName.$webRoot; ?>/src/css/ui.css" /><!-- 组件样式库 -->
+<script type="text/javascript" src="<?php echo $webDName.$webRoot; ?>/src/js/jquery-1.8.0.min.js"></script><!-- jQuery 核心库 -->
+<script type="text/javascript" src="<?php echo $webDName.$webRoot; ?>/src/js/jquery.animate-shadow.js"></script><!-- jQuery 阴影动画插件 -->
+<script type="text/javascript" src="<?php echo $webDName.$webRoot; ?>/plugin/yui/yui.js"></script>
+<script type="text/javascript" src="<?php echo $webDName.$webRoot; ?>/src/js/Effect.js"></script>
+<script type="text/javascript" src="<?php echo $webDName.$webRoot; ?>/src/js/Processor.js"></script><!-- 处理器 -->
 <script type="text/javascript">
 <!--
 	var eft = new Effect();
 	var pcs = new Processor();
-	var yui = new YUI();
-	var webDName = "<?php echo $this -> get('webDName'); ?>";//域名
-	var webRoot = "<?php echo $this -> get('webRoot'); ?>";//根目录
+	var webDName = "<?php echo $webDName; ?>";//域名
+	var webRoot = "<?php echo $webRoot; ?>";//根目录
+	var yui = new YUI(webDName + webRoot +'/plugin');
 	
 	//DOM载入
 	$(function(){
@@ -25,7 +33,6 @@
 		pcs.authRegister();//注册
 		pcs.authLogin();//登录
 		pcs.logout();//注销
-		pcs.ask();//我要提问
 	})
 	
 	//窗口大小重置
@@ -43,6 +50,7 @@
 
 <body>
 	
+    <!-- 导航 -->
     <?php $this -> display('head.html'); ?>
     
     <!-- 主体 -->
@@ -81,6 +89,16 @@
                 	<div class="l">
                     	<h3 class="title">最新问题&nbsp;<a class="more-flag" href="" title="更多">»</a></h3>
                         <ul>
+                        	<?php for($i=0;$i<count($newestAskList);$i++){ ?>
+                            <li>
+                                <a href="?q=zero/article/article&aid=<?php echo $newestAskList[$i]['askId']; ?>" target="_blank">
+                                <?php echo $newestAskList[$i]['title']; ?>
+                                </a>
+                                &nbsp;&nbsp;<?php echo $newestAskList[$i]['answers']; ?>&nbsp;回答
+                            </li>
+                            <?php } ?>
+                            
+                            <!--
                         	<li><a href="">标题标题标题标题标题标题标题标题标题标题</a>&nbsp;&nbsp;0&nbsp;回答</li>
                             <li><a href="">Android 环境怎么搭建？</a>&nbsp;&nbsp;0&nbsp;回答</li>
                             <li><a href="">Java 环境怎么搭建？</a>&nbsp;&nbsp;0&nbsp;回答</li>
@@ -93,11 +111,22 @@
                             <li><a href="">Android 环境怎么搭建？</a>&nbsp;&nbsp;0&nbsp;回答</li>
                             <li><a href="">Java 环境怎么搭建？</a>&nbsp;&nbsp;0&nbsp;回答</li>
                             <li><a href="">Android 环境怎么搭建？</a>&nbsp;&nbsp;0&nbsp;回答</li>
+                            -->
                         </ul>
                     </div>
                 	<div class="r">
                     	<h3 class="title">最新解决&nbsp;<a class="more-flag" href="" title="更多">»</a></h3>
                         <ul>
+                        	<?php for($i=0;$i<count($newestAnswerList);$i++){ ?>
+                            <li>
+                            	<a href="?q=zero/article/article&aid=<?php echo $newestAnswerList[$i]['aid']; ?>" target="_blank">
+                                	<?php echo $newestAnswerList[$i]['title']; ?>
+                                </a>
+                            	&nbsp;&nbsp;<?php echo $newestAnswerList[$i]['answers']; ?>&nbsp;回答
+                            </li>
+                            <?php } ?>
+                            
+                            <!--
                         	<li><a href="">Java 环境怎么搭建？</a>&nbsp;&nbsp;6&nbsp;回答</li>
                             <li><a href="">Android 环境怎么搭建？</a>&nbsp;&nbsp;1&nbsp;回答</li>
                             <li><a href="">Java 环境怎么搭建？</a>&nbsp;&nbsp;5&nbsp;回答</li>
@@ -110,6 +139,7 @@
                             <li><a href="">Android 环境怎么搭建？</a>&nbsp;&nbsp;6&nbsp;回答</li>
                             <li><a href="">Java 环境怎么搭建？</a>&nbsp;&nbsp;9&nbsp;回答</li>
                             <li><a href="">Android 环境怎么搭建？</a>&nbsp;&nbsp;6&nbsp;回答</li>
+                            -->
                         </ul>
                     </div>
                 </div>
@@ -263,52 +293,52 @@
                 	<h3 class="title">达人榜</h3>
                     <ul>
                         <li>
-                        	<img src="<?php echo $this -> get('webDName').$this -> get('webRoot'); ?>/src/images/avatar.jpg" />
+                        	<img src="<?php echo $webDName.$webRoot; ?>/src/images/avatar.jpg" />
                             <span class="nickname">Zero</span>
                             <span class="help">60&nbsp;帮助</span>
                         </li>
                         <li>
-                        	<img src="<?php echo $this -> get('webDName').$this -> get('webRoot'); ?>/src/images/avatar.jpg" />
+                        	<img src="<?php echo $webDName.$webRoot; ?>/src/images/avatar.jpg" />
                             <span class="nickname">逍遥生</span>
                             <span class="help">60&nbsp;帮助</span>
                         </li>
                         <li>
-                        	<img src="<?php echo $this -> get('webDName').$this -> get('webRoot'); ?>/src/images/avatar.jpg" />
+                        	<img src="<?php echo $webDName.$webRoot; ?>/src/images/avatar.jpg" />
                             <span class="nickname">雨过天晴</span>
                             <span class="help">60&nbsp;帮助</span>
                         </li>
                         <li>
-                        	<img src="<?php echo $this -> get('webDName').$this -> get('webRoot'); ?>/src/images/avatar.jpg" />
+                        	<img src="<?php echo $webDName.$webRoot; ?>/src/images/avatar.jpg" />
                             <span class="nickname">缘</span>
                             <span class="help">60&nbsp;帮助</span>
                         </li>
                         <li>
-                        	<img src="<?php echo $this -> get('webDName').$this -> get('webRoot'); ?>/src/images/avatar.jpg" />
+                        	<img src="<?php echo $webDName.$webRoot; ?>/src/images/avatar.jpg" />
                             <span class="nickname">青春飞扬</span>
                             <span class="help">60&nbsp;帮助</span>
                         </li>
                         <li>
-                        	<img src="<?php echo $this -> get('webDName').$this -> get('webRoot'); ?>/src/images/avatar.jpg" />
+                        	<img src="<?php echo $webDName.$webRoot; ?>/src/images/avatar.jpg" />
                             <span class="nickname">小蜜蜂</span>
                             <span class="help">60&nbsp;帮助</span>
                         </li>
                         <li>
-                        	<img src="<?php echo $this -> get('webDName').$this -> get('webRoot'); ?>/src/images/avatar.jpg" />
+                        	<img src="<?php echo $webDName.$webRoot; ?>/src/images/avatar.jpg" />
                             <span class="nickname">一只会飞的羊</span>
                             <span class="help">60&nbsp;帮助</span>
                         </li>
                         <li>
-                        	<img src="<?php echo $this -> get('webDName').$this -> get('webRoot'); ?>/src/images/avatar.jpg" />
+                        	<img src="<?php echo $webDName.$webRoot; ?>/src/images/avatar.jpg" />
                             <span class="nickname">码农</span>
                             <span class="help">60&nbsp;帮助</span>
                         </li>
                         <li>
-                        	<img src="<?php echo $this -> get('webDName').$this -> get('webRoot'); ?>/src/images/avatar.jpg" />
+                        	<img src="<?php echo $webDName.$webRoot; ?>/src/images/avatar.jpg" />
                             <span class="nickname">羽翼天使</span>
                             <span class="help">60&nbsp;帮助</span>
                         </li>
                         <li>
-                        	<img src="<?php echo $this -> get('webDName').$this -> get('webRoot'); ?>/src/images/avatar.jpg" />
+                        	<img src="<?php echo $webDName.$webRoot; ?>/src/images/avatar.jpg" />
                             <span class="nickname">Mang 果</span>
                             <span class="help">60&nbsp;帮助</span>
                         </li>
