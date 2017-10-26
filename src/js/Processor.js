@@ -1314,8 +1314,30 @@ function Processor(){
 		isRequest = $.ajax({
 			url: webDName + webRoot +'/index.php',
 			type: 'POST',
+			data: sendData
+		});
+	}
+	
+	//在线用户统计
+	this.onlines = function(){
+		//获取在线用户数
+		var sendData = {
+							"q":"zero/Index/getOnlines"
+						};
+		isRequest = $.ajax({
+			url: webDName + webRoot +'/index.php',
+			type: 'POST',
 			data: sendData,
 			dataType: "json",
+			success: function(data, status){
+				if(data.status == 0){
+					if(typeof(counter) != 'undefined'){
+						counter.update(parseInt(data.onlines));
+					}
+				}
+			},
+			error: function(jqXHR, status, error){
+			}
 		});
 	}
 }

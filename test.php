@@ -84,7 +84,15 @@
 
 	//------SQL防注入测试------
 
-	$str = "select id,isDisplay from user where username='縗' OR 1 limit 1/*' and passwd='%'
+	/*$str = "select id,isDisplay from user where username='縗' OR 1 limit 1/*' and passwd='%'
 Illegal mix of collations (latin1_swedish_ci,IMPLICIT) and (gbk_chinese_ci,COERCIBLE) for operation '='";
-	echo addcslashes($str, '~!@#$%^&*()_+{}|-=[]:";\'>?./');
+	echo addcslashes($str, '~!@#$%^&*()_+{}|-=[]:";\'>?./');*/
+
+	echo 'Cookie 客户端身份认证加密<br/><br/>';
+
+	$cid = time().rand(1, 1000);
+
+	echo '未加密：'.$cid;
+	echo '<br/>';
+	echo '32位 MD5加密：'.md5($cid);
 ?>

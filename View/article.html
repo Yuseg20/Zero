@@ -49,11 +49,11 @@
 		pcs.answerPaging(<?php echo $answerPages; ?>);//答案分页
 	})
 	
-	//资源载入
-	window.onload = function(){
+	//资源载入完成
+	$(window).load(function(){
 		pcs.submitAnswer();//提交答案
 		pcs.updatePV();//更新浏览量
-	}
+	});
 	
 	//窗口大小重置
 	$(window).resize(function(e) {

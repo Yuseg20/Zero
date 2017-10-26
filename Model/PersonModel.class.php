@@ -143,5 +143,25 @@
 
 			return 0;
 		}
+
+		//获取达人榜
+		public function getGoodList(){
+			//创建数据库对象
+			$pdo = new MiniPDO();
+
+			//获取达人榜
+			$sql = "SELECT user_info.ui_nickname as 'nickname', count(*) as 'helps'
+					FROM user_info,user_answer
+					WHERE user_answer.ua_user=user_info.ua_user
+					GROUP BY user_info.ua_user
+					ORDER BY count(*) DESC
+					LIMIT 0,10";
+			$rs = $pdo -> query($sql);
+
+			//关闭数据库连接
+			$pdo -> close();
+
+			return $rs;
+		}
 	}
 ?>

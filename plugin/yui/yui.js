@@ -488,4 +488,119 @@ function YUI(pluginRoot){
 		//------ 返回句柄 ------
 		
 	}
+	
+	//数值统计器
+	this.counter = function(selector, params){
+		if(!params) return;
+		
+		var $selector = $(selector);//获取选择器（组件依附对象）
+		var $params = params;//获取参数
+		var numLength = $params.numLength ? parseInt($params.numLength) : 9;//获取数位长度
+		var numSize = $params.numSize ? parseInt($params.numSize) : 16;//获取数位字体大小
+		var speed = $params.speed ? parseInt($params.speed) : 2000;//运动速度
+		var $uls = new Array();// 0-9 元素数组
+		var obj = new Object();//返回对象
+		var ulSpt = null;//列表
+		
+		//----初始化组件---
+		//创建组件容器
+		var $container = $('<div></div>');
+		$container.css({
+			'display':'inline-block',
+			'margin':'0 auto',
+			'overflow':'hidden',
+			'line-height':'5em'
+		});
+		
+		//创建位数
+		for(var i=0;i<numLength;i++){
+			
+			//创建单位 0-9 元素
+			var $ul = $('<ul></ul>');
+			$ul.css({
+				'position':'relative',
+				'text-align':'center',
+				'padding':'0',
+				'margin':'0',
+				'overflow':'hidden',
+				'float':'right'
+			});
+			
+			for(var k=0;k<10;k++){
+				var $li = $('<li>'+ k +'</li>');
+
+				$li.css({
+					'list-style-type':'none',
+					'font-size':numSize +'px',
+					//'font-weight':'bold',
+					'line-height':'1em',
+					'color':'#F60',
+					'padding':'0',
+					'margin':'0'
+				});
+				
+				$li.appendTo($ul);
+			}
+			
+			$ul.appendTo($container);
+			
+			//创建千位分隔符
+			if((i+1) % 3 == 0 && (i+1) < numLength){
+				var $ulSplit = $('<ul></ul>');
+				$ulSplit.css({
+					
+					'position':'relative',
+					'top':'-15%',
+					'text-align':'center',
+					'padding':'0',
+					'margin':'0',
+					'float':'right'
+				});
+				
+				var $liSplit = $('<li>,</li>');
+				$liSplit.css({
+					'width':'.5em',
+					'list-style-type':'none',
+					'font-size':numSize +'px',
+					//'font-weight':'bold',
+					'line-height':'1em',
+					'color':'#F60',
+					'padding':'0',
+					'margin':'0'
+				});
+				
+				ulSpt = $ulSplit;
+				$liSplit.appendTo($ulSplit);
+				$ulSplit.appendTo($container);
+			}
+			
+			$uls[i] = $ul;
+		}
+		
+		//页面渲染
+		$container.appendTo($selector);
+		
+		//重置组件容器高度
+		$container.height(ulSpt.height());
+		
+		//---更新数值---
+		obj.update = function(number){
+			
+			var newNumsArr = number.toString().split('').reverse();//获取新值并数组逆序
+			var forEnd = newNumsArr.length;
+			
+			//播放至目标数值
+			for(var i=0;i<forEnd;i++){
+				var target = -ulSpt.height()*newNumsArr[i];
+				$uls[i].stop();
+				$uls[i].animate({
+					'top':target +'px'
+				},{
+					duration:speed
+				});
+			}
+		}
+		
+		return obj;
+	}
 }

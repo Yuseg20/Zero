@@ -4,6 +4,7 @@
     $webRoot = $this -> get('webRoot');
     $newestAskList = $this ->get('newestAskList');
     $newestAnswerList = $this -> get('newestAnswerList');
+    $goodList = $this -> get('good-list');
 ?>
 
 <!doctype html>
@@ -25,6 +26,7 @@
 	var webDName = "<?php echo $webDName; ?>";//域名
 	var webRoot = "<?php echo $webRoot; ?>";//根目录
 	var yui = new YUI(webDName + webRoot +'/plugin');
+	var counter = null;//统计器
 	
 	//DOM载入
 	$(function(){
@@ -33,6 +35,13 @@
 		pcs.authRegister();//注册
 		pcs.authLogin();//登录
 		pcs.logout();//注销
+		
+		//添加统计器
+		counter = yui.counter('#num-clock',{
+			numLength:7,
+			numSize:36,
+			speed:2000
+		});
 	})
 	
 	//窗口大小重置
@@ -66,7 +75,7 @@
                     <!-- 内容 -->
                     <div class="content-bg">
                     	<div class="content-front">
-                        	<h1 class="user-counts">9,327,562</h1>
+                        	<h1 id="num-clock" class="user-counts" style="font-weight:500;"><!--9,327,562--></h1>
                         </div>
                     </div>
                 </div>
@@ -97,21 +106,6 @@
                                 &nbsp;&nbsp;<?php echo $newestAskList[$i]['answers']; ?>&nbsp;回答
                             </li>
                             <?php } ?>
-                            
-                            <!--
-                        	<li><a href="">标题标题标题标题标题标题标题标题标题标题</a>&nbsp;&nbsp;0&nbsp;回答</li>
-                            <li><a href="">Android 环境怎么搭建？</a>&nbsp;&nbsp;0&nbsp;回答</li>
-                            <li><a href="">Java 环境怎么搭建？</a>&nbsp;&nbsp;0&nbsp;回答</li>
-                            <li><a href="">Android 环境怎么搭建？</a>&nbsp;&nbsp;0&nbsp;回答</li>
-                            <li><a href="">Java 环境怎么搭建？</a>&nbsp;&nbsp;0&nbsp;回答</li>
-                            <li><a href="">Android 环境怎么搭建？</a>&nbsp;&nbsp;0&nbsp;回答</li>
-                            <li><a href="">Java 环境怎么搭建？</a>&nbsp;&nbsp;0&nbsp;回答</li>
-                            <li><a href="">Android 环境怎么搭建？</a>&nbsp;&nbsp;0&nbsp;回答</li>
-                            <li><a href="">Java 环境怎么搭建？</a>&nbsp;&nbsp;0&nbsp;回答</li>
-                            <li><a href="">Android 环境怎么搭建？</a>&nbsp;&nbsp;0&nbsp;回答</li>
-                            <li><a href="">Java 环境怎么搭建？</a>&nbsp;&nbsp;0&nbsp;回答</li>
-                            <li><a href="">Android 环境怎么搭建？</a>&nbsp;&nbsp;0&nbsp;回答</li>
-                            -->
                         </ul>
                     </div>
                 	<div class="r">
@@ -125,21 +119,6 @@
                             	&nbsp;&nbsp;<?php echo $newestAnswerList[$i]['answers']; ?>&nbsp;回答
                             </li>
                             <?php } ?>
-                            
-                            <!--
-                        	<li><a href="">Java 环境怎么搭建？</a>&nbsp;&nbsp;6&nbsp;回答</li>
-                            <li><a href="">Android 环境怎么搭建？</a>&nbsp;&nbsp;1&nbsp;回答</li>
-                            <li><a href="">Java 环境怎么搭建？</a>&nbsp;&nbsp;5&nbsp;回答</li>
-                            <li><a href="">Android 环境怎么搭建？</a>&nbsp;&nbsp;10&nbsp;回答</li>
-                            <li><a href="">Java 环境怎么搭建？</a>&nbsp;&nbsp;20&nbsp;回答</li>
-                            <li><a href="">Android 环境怎么搭建？</a>&nbsp;&nbsp;8&nbsp;回答</li>
-                            <li><a href="">Java 环境怎么搭建？</a>&nbsp;&nbsp;20&nbsp;回答</li>
-                            <li><a href="">Android 环境怎么搭建？</a>&nbsp;&nbsp;62&nbsp;回答</li>
-                            <li><a href="">Java 环境怎么搭建？</a>&nbsp;&nbsp;1&nbsp;回答</li>
-                            <li><a href="">Android 环境怎么搭建？</a>&nbsp;&nbsp;6&nbsp;回答</li>
-                            <li><a href="">Java 环境怎么搭建？</a>&nbsp;&nbsp;9&nbsp;回答</li>
-                            <li><a href="">Android 环境怎么搭建？</a>&nbsp;&nbsp;6&nbsp;回答</li>
-                            -->
                         </ul>
                     </div>
                 </div>
@@ -151,124 +130,25 @@
                     <ul>
                         <li><a href="">Java</a></li>
                         <li><a href="">Android</a></li>
-                        <li style="background:#009966;"><a href="">PHP</a></li>
                         <li><a href="">Node.js</a></li>
                         <li><a href="">人工智能</a></li>
-                        <li style="background:#009966;"><a href="">Ajax</a></li>
-                        <li style="background:#009966;"><a href="">JavaScript</a></li>
                         <li><a href="">Redis</a></li>
-                        <li><a href="">MySQL</a></li>
-                        <li style="background:#009966;"><a href="">jQuery</a></li>
-                        <li style="background:#009966;"><a href="">Linux</a></li>
-                        <li><a href="">HTML5</a></li>
                         <li><a href="">CSS3</a></li>
                         <li><a href="">Extjs</a></li>
                         <li><a href="">ThinkPHP</a></li>
                         <li><a href="">Yii</a></li>
                         <li><a href="">二次开发</a></li>
                         <li><a href="">CMS</a></li>
-                        <li style="background:#009966;"><a href="">LAMP</a></li>
-                        <li style="background:#009966;"><a href="">WAMP</a></li>
                         <li><a href="">Java</a></li>
                         <li><a href="">Android</a></li>
-                        <li style="background:#009966;"><a href="">PHP</a></li>
+                        <li><a href="">MySQL</a></li>
                         <li><a href="">Node.js</a></li>
                         <li><a href="">人工智能</a></li>
-                        <li style="background:#009966;"><a href="">Ajax</a></li>
-                        <li style="background:#009966;"><a href="">JavaScript</a></li>
                         <li><a href="">Redis</a></li>
                         <li><a href="">MySQL</a></li>
-                        <li style="background:#009966;"><a href="">jQuery</a></li>
-                        <li style="background:#009966;"><a href="">Linux</a></li>
                         <li><a href="">HTML5</a></li>
-                        <li><a href="">CSS3</a></li>
-                        <li><a href="">Extjs</a></li>
                         <li><a href="">ThinkPHP</a></li>
-                        <li><a href="">Yii</a></li>
-                        <li><a href="">二次开发</a></li>
-                        <li><a href="">CMS</a></li>
-                        <li style="background:#009966;"><a href="">LAMP</a></li>
-                        <li style="background:#009966;"><a href="">WAMP</a></li>
-                        <li><a href="">Java</a></li>
-                        <li><a href="">Android</a></li>
-                        <li style="background:#009966;"><a href="">PHP</a></li>
-                        <li><a href="">Node.js</a></li>
-                        <li><a href="">人工智能</a></li>
-                        <li style="background:#009966;"><a href="">Ajax</a></li>
-                        <li style="background:#009966;"><a href="">JavaScript</a></li>
-                        <li><a href="">Redis</a></li>
-                        <li><a href="">MySQL</a></li>
-                        <li style="background:#009966;"><a href="">jQuery</a></li>
-                        <li style="background:#009966;"><a href="">Linux</a></li>
-                        <li><a href="">HTML5</a></li>
-                        <li><a href="">CSS3</a></li>
-                        <li><a href="">Extjs</a></li>
-                        <li><a href="">ThinkPHP</a></li>
-                        <li><a href="">Yii</a></li>
-                        <li><a href="">二次开发</a></li>
-                        <li><a href="">CMS</a></li>
-                        <li style="background:#009966;"><a href="">LAMP</a></li>
-                        <li style="background:#009966;"><a href="">WAMP</a></li>
-                        <li><a href="">Java</a></li>
-                        <li><a href="">Android</a></li>
-                        <li style="background:#009966;"><a href="">PHP</a></li>
-                        <li><a href="">Node.js</a></li>
-                        <li><a href="">人工智能</a></li>
-                        <li style="background:#009966;"><a href="">Ajax</a></li>
-                        <li style="background:#009966;"><a href="">JavaScript</a></li>
-                        <li><a href="">Redis</a></li>
-                        <li><a href="">MySQL</a></li>
-                        <li style="background:#009966;"><a href="">jQuery</a></li>
-                        <li style="background:#009966;"><a href="">Linux</a></li>
-                        <li><a href="">HTML5</a></li>
-                        <li><a href="">CSS3</a></li>
-                        <li><a href="">Extjs</a></li>
-                        <li><a href="">ThinkPHP</a></li>
-                        <li><a href="">Yii</a></li>
-                        <li><a href="">二次开发</a></li>
-                        <li><a href="">CMS</a></li>
-                        <li style="background:#009966;"><a href="">LAMP</a></li>
-                        <li style="background:#009966;"><a href="">WAMP</a></li>
-                        <li><a href="">Java</a></li>
-                        <li><a href="">Android</a></li>
-                        <li style="background:#009966;"><a href="">PHP</a></li>
-                        <li><a href="">Node.js</a></li>
-                        <li><a href="">人工智能</a></li>
-                        <li style="background:#009966;"><a href="">Ajax</a></li>
-                        <li style="background:#009966;"><a href="">JavaScript</a></li>
-                        <li><a href="">Redis</a></li>
-                        <li><a href="">MySQL</a></li>
-                        <li style="background:#009966;"><a href="">jQuery</a></li>
-                        <li style="background:#009966;"><a href="">Linux</a></li>
-                        <li><a href="">HTML5</a></li>
-                        <li><a href="">CSS3</a></li>
-                        <li><a href="">Extjs</a></li>
-                        <li><a href="">ThinkPHP</a></li>
-                        <li><a href="">Yii</a></li>
-                        <li><a href="">二次开发</a></li>
-                        <li><a href="">CMS</a></li>
-                        <li style="background:#009966;"><a href="">LAMP</a></li>
-                        <li style="background:#009966;"><a href="">WAMP</a></li>
-                        <li><a href="">Java</a></li>
-                        <li><a href="">Android</a></li>
-                        <li style="background:#009966;"><a href="">PHP</a></li>
-                        <li><a href="">Node.js</a></li>
-                        <li><a href="">人工智能</a></li>
-                        <li style="background:#009966;"><a href="">Ajax</a></li>
-                        <li style="background:#009966;"><a href="">JavaScript</a></li>
-                        <li><a href="">Redis</a></li>
-                        <li><a href="">MySQL</a></li>
-                        <li style="background:#009966;"><a href="">jQuery</a></li>
-                        <li style="background:#009966;"><a href="">Linux</a></li>
-                        <li><a href="">HTML5</a></li>
-                        <li><a href="">CSS3</a></li>
-                        <li><a href="">Extjs</a></li>
-                        <li><a href="">ThinkPHP</a></li>
-                        <li><a href="">Yii</a></li>
-                        <li><a href="">二次开发</a></li>
-                        <li><a href="">CMS</a></li>
-                        <li style="background:#009966;"><a href="">LAMP</a></li>
-                        <li style="background:#009966;"><a href="">WAMP</a></li>
+                        
                     </ul>
                 </div>
             </div>
@@ -292,56 +172,13 @@
             	<div class="good-container">
                 	<h3 class="title">达人榜</h3>
                     <ul>
+                    	<?php for($i=0;$i<count($goodList);$i++){ ?>
                         <li>
                         	<img src="<?php echo $webDName.$webRoot; ?>/src/images/avatar.jpg" />
-                            <span class="nickname">Zero</span>
-                            <span class="help">60&nbsp;帮助</span>
+                            <span class="nickname"><?php echo $goodList[$i]['nickname']; ?></span>
+                            <span class="help"><?php echo $goodList[$i]['helps'] ?>&nbsp;帮助</span>
                         </li>
-                        <li>
-                        	<img src="<?php echo $webDName.$webRoot; ?>/src/images/avatar.jpg" />
-                            <span class="nickname">逍遥生</span>
-                            <span class="help">60&nbsp;帮助</span>
-                        </li>
-                        <li>
-                        	<img src="<?php echo $webDName.$webRoot; ?>/src/images/avatar.jpg" />
-                            <span class="nickname">雨过天晴</span>
-                            <span class="help">60&nbsp;帮助</span>
-                        </li>
-                        <li>
-                        	<img src="<?php echo $webDName.$webRoot; ?>/src/images/avatar.jpg" />
-                            <span class="nickname">缘</span>
-                            <span class="help">60&nbsp;帮助</span>
-                        </li>
-                        <li>
-                        	<img src="<?php echo $webDName.$webRoot; ?>/src/images/avatar.jpg" />
-                            <span class="nickname">青春飞扬</span>
-                            <span class="help">60&nbsp;帮助</span>
-                        </li>
-                        <li>
-                        	<img src="<?php echo $webDName.$webRoot; ?>/src/images/avatar.jpg" />
-                            <span class="nickname">小蜜蜂</span>
-                            <span class="help">60&nbsp;帮助</span>
-                        </li>
-                        <li>
-                        	<img src="<?php echo $webDName.$webRoot; ?>/src/images/avatar.jpg" />
-                            <span class="nickname">一只会飞的羊</span>
-                            <span class="help">60&nbsp;帮助</span>
-                        </li>
-                        <li>
-                        	<img src="<?php echo $webDName.$webRoot; ?>/src/images/avatar.jpg" />
-                            <span class="nickname">码农</span>
-                            <span class="help">60&nbsp;帮助</span>
-                        </li>
-                        <li>
-                        	<img src="<?php echo $webDName.$webRoot; ?>/src/images/avatar.jpg" />
-                            <span class="nickname">羽翼天使</span>
-                            <span class="help">60&nbsp;帮助</span>
-                        </li>
-                        <li>
-                        	<img src="<?php echo $webDName.$webRoot; ?>/src/images/avatar.jpg" />
-                            <span class="nickname">Mang 果</span>
-                            <span class="help">60&nbsp;帮助</span>
-                        </li>
+                        <?php } ?>
                     </ul>
                 </div>
             </div>

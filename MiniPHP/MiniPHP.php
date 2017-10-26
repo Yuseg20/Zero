@@ -110,6 +110,7 @@ function __autoload($className){
 	$pLibs = array(
 		'Controller',
 		'MySQL',
+		'Cookie',
 		'Session',
 		'Error',
 		'MiniPDO'

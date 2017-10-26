@@ -5,12 +5,12 @@
 class Cookie{
 
 	//设置Cookie
-	public function setVal($cookieName, $cookieValue, $cookieTime = 0){
-		if($cookieTime == 0){
-			setcookie($cookieName, $cookieValue);
-		}else{
-			setcookie($cookieName, $cookieValue, time()+$cookieTime);
+	public function setVal($cookieName, $cookieValue, $cookieTime = 0, $path = '/'){
+		if($cookieTime > 0){
+			$cookieTime += time();
 		}
+
+		setcookie($cookieName, $cookieValue, $cookieTime, $path);
 	}
 
 	//获取Cookie

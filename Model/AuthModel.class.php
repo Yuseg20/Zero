@@ -104,5 +104,66 @@
 				return $rs[0]['ua_pwd'];
 			}
 		}
+
+		//写入在线生命周期
+		public function insertOnlineLife($cid = ''){
+			if(empty($cid)) return;
+
+			//创建数据库对象
+			$pdo = new MiniPDO();
+
+			$time = time();
+			$sql = "INSERT INTO user_online (uo_cid, uo_last_time)
+					VALUES ('{$cid}', '{$time}')";
+
+			//执行
+			$rs = $pdo -> execute($sql);
+
+			//关闭数据库连接
+			$pdo -> close();
+
+			return $rs;
+		}
+
+		//更新在线生命周期
+		public function updateOnlineLife($cid = ''){
+			if(empty($cid)) return;
+
+			//创建数据库对象
+			$pdo = new MiniPDO();
+
+			$time = time();
+			$sql = "UPDATE user_online
+					SET uo_last_time='{$time}'
+					WHERE uo_cid='{$cid}'";
+
+			//执行
+			$rs = $pdo -> execute($sql);
+
+			//关闭数据库连接
+			$pdo -> close();
+
+			return $rs;
+		}
+
+		//获取在线人数
+		public function getOnlines(){
+			//获取生命周期
+			$otime = Config::get('system.otime');
+
+			//创建数据库对象
+			$pdo = new MiniPDO();
+
+			//获取在线人数
+			$sql = "SELECT count(*) as 'onlines'
+					FROM user_online
+					WHERE unix_timestamp()-uo_last_time<:otime";
+			$rs = $pdo -> query($sql,array(
+				'otime' => $otime
+			));
+
+			//返回结果
+			return !empty($rs) ? $rs[0] : false;
+		}
 	}
 ?>

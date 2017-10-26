@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 	/* 文章控制器 */
 	class ArticleController extends Controller{
 
