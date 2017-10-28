@@ -170,7 +170,29 @@
 			//返回结果
 			return $status;
 		}
+
+		//获取热点推荐列表
+		public function getHotAsk($index = 0, $length = 0){
+			//创建数据库对象
+			$pdo = new MiniPDO();
+
+			//查询回答信息
+			$sql = "SELECT user_ask.uq_id as 'aid', user_ask.uq_title as 'title', count(*) as 'answers'
+					FROM user_ask,user_answer
+					WHERE user_ask.uq_id=user_answer.uq_id
+					GROUP BY user_ask.uq_id
+					ORDER BY answers DESC
+					LIMIT {$index},{$length}";
+
+			$rs = $pdo -> query($sql,array(
+				'aid' => $this -> aid
+			));
+
+			//关闭数据库连接
+			$pdo -> close();
+
+			//返回结果
+			return $rs;
+		}
 	}
-
-
 ?>

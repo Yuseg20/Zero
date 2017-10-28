@@ -9,7 +9,7 @@
     $nickname = $this -> get('nickname');
     $avatar = $this -> get('avatar');
     $askList = $this -> get('ask-list');
-    $answerPages = $this -> get('answer-pages');
+    $answerPages = $this -> get('answer-pages') === null ? 0 : $this -> get('answer-pages');
     $answerList = $this -> get('answer-list');
     $aid = $this -> get('aid');
 ?>
@@ -17,7 +17,7 @@
 <!doctype html>
 <html>
 <head>
-<title>Zero - 内容页</title>
+<title>Zero - <?php echo $title; ?></title>
 <meta charset="utf-8" />
 <link type="text/css" rel="stylesheet" href="<?php echo $webDName.$webRoot; ?>/src/css/style.css" /><!-- 公共样式库 -->
 <link type="text/css" rel="stylesheet" href="<?php echo $webDName.$webRoot; ?>/src/css/ui.css" /><!-- 组件样式库 -->

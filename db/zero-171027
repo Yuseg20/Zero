@@ -1,0 +1,211 @@
+-- MySQL dump 10.13  Distrib 5.5.28, for Win64 (x86)
+--
+-- Host: localhost    Database: zero
+-- ------------------------------------------------------
+-- Server version	5.5.28
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `sys_info`
+--
+
+DROP TABLE IF EXISTS `sys_info`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sys_info` (
+  `si_id` int(11) NOT NULL AUTO_INCREMENT,
+  `si_dname` varchar(64) DEFAULT NULL,
+  `si_root` varchar(16) DEFAULT NULL,
+  `si_intro` varchar(32) DEFAULT NULL,
+  `si_copyright` varchar(128) DEFAULT NULL,
+  PRIMARY KEY (`si_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sys_info`
+--
+
+LOCK TABLES `sys_info` WRITE;
+/*!40000 ALTER TABLE `sys_info` DISABLE KEYS */;
+INSERT INTO `sys_info` VALUES (1,'http://www.work.com','/zero','Zero - 一个零距离问答互动平台','Copyright&nbsp;&copy;&nbsp;2017&nbsp;By&nbsp;Zero.');
+/*!40000 ALTER TABLE `sys_info` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sys_notice`
+--
+
+DROP TABLE IF EXISTS `sys_notice`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sys_notice` (
+  `sn_id` int(11) NOT NULL AUTO_INCREMENT,
+  `sn_title` varchar(32) DEFAULT NULL,
+  `sn_content` varchar(2048) DEFAULT NULL,
+  PRIMARY KEY (`sn_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sys_notice`
+--
+
+LOCK TABLES `sys_notice` WRITE;
+/*!40000 ALTER TABLE `sys_notice` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sys_notice` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user_answer`
+--
+
+DROP TABLE IF EXISTS `user_answer`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user_answer` (
+  `uas_id` int(11) NOT NULL AUTO_INCREMENT,
+  `uq_id` int(11) DEFAULT NULL,
+  `ua_user` varchar(32) DEFAULT NULL,
+  `uas_content` varchar(128) DEFAULT NULL,
+  `uas_publish_time` int(11) DEFAULT NULL,
+  PRIMARY KEY (`uas_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_answer`
+--
+
+LOCK TABLES `user_answer` WRITE;
+/*!40000 ALTER TABLE `user_answer` DISABLE KEYS */;
+INSERT INTO `user_answer` VALUES (21,38,'zero','/upload/answer/2017102214393487.zero',1508654374),(22,38,'zero','/upload/answer/2017102214395337.zero',1508654393),(23,49,'admin','/upload/answer/2017102214442233.zero',1508654662),(24,49,'demo','/upload/answer/2017102214592749.zero',1508655567),(25,49,'demo','/upload/answer/2017102215001731.zero',1508655617),(26,49,'demo','/upload/answer/2017102215002047.zero',1508655620),(27,49,'demo','/upload/answer/2017102215002757.zero',1508655627),(28,49,'demo','/upload/answer/2017102215003324.zero',1508655633),(29,49,'demo','/upload/answer/2017102215003727.zero',1508655637),(30,49,'demo','/upload/answer/2017102215004070.zero',1508655640),(31,49,'demo','/upload/answer/2017102215004862.zero',1508655648),(32,49,'demo','/upload/answer/2017102215005237.zero',1508655652),(33,50,'admin','/upload/answer/2017102217582697.zero',1508666306),(34,50,'demo','/upload/answer/2017102218071615.zero',1508666836),(35,50,'admin','/upload/answer/2017102218243638.zero',1508667876),(36,51,'admin','/upload/answer/2017102218262479.zero',1508667984),(37,40,'admin','/upload/answer/2017102222470667.zero',1508683626),(38,41,'demo','/upload/answer/2017102311195087.zero',1508728790),(42,51,'zero','/upload/answer/2017102616124057.zero',1509005560),(43,51,'ygtq','/upload/answer/2017102713481391.zero',1509083293);
+/*!40000 ALTER TABLE `user_answer` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user_ask`
+--
+
+DROP TABLE IF EXISTS `user_ask`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user_ask` (
+  `uq_id` int(11) NOT NULL AUTO_INCREMENT,
+  `ua_user` varchar(32) DEFAULT NULL,
+  `uq_title` varchar(64) DEFAULT NULL,
+  `uq_desc` varchar(2048) DEFAULT NULL,
+  `uq_pv` int(11) DEFAULT '0',
+  `uq_publish_time` int(11) DEFAULT NULL,
+  `uq_first_answer_time` int(11) DEFAULT '0',
+  PRIMARY KEY (`uq_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_ask`
+--
+
+LOCK TABLES `user_ask` WRITE;
+/*!40000 ALTER TABLE `user_ask` DISABLE KEYS */;
+INSERT INTO `user_ask` VALUES (34,'zero','提问1','',0,1508511406,0),(35,'zero','提问2','',0,1508511424,0),(36,'zero','提问3','',0,1508511433,0),(37,'zero','提问5','',0,1508511443,0),(38,'zero','提问6','',0,1508511451,0),(39,'zero','提问7','',0,1508511461,0),(40,'zero','提问8','',4,1508511474,0),(41,'zero','提问9','',15,1508511481,1508728790),(42,'zero','提问10','',0,1508511502,0),(43,'zero','提问11','',0,1508511514,0),(44,'zero','提问12','',1,1508511522,0),(45,'zero','提问13','',1,1508511535,0),(46,'zero','提问4','',0,1508511565,0),(47,'zero','提问14','',0,1508511599,0),(48,'zero','提问15','',1,1508511608,0),(49,'zero','PHP 环境怎么搭建','最近想学习PHP，但不知道怎么搭建环境，跪大神。。。',13,1508654493,0),(50,'demo','PHP 提示出错 Fatal error','Fatal error: Uncaught exception \'Exception\' with message \'SQLSTATE[HY000] [1045] Access denied for user \'root\'@\'localhost\' (using password: YES)\' in G:\\Workspace\\Zero\\MiniPHP\\Libs\\MiniPDO.class.php:35',33,1508661543,0),(51,'demo','PHP数组无效','PHP数组用 [] 形式创建报错',22,1508666623,1509005560),(52,'admin','主页测试','',3,1508671048,0),(53,'zero','%','',1,1508746529,0);
+/*!40000 ALTER TABLE `user_ask` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user_auth`
+--
+
+DROP TABLE IF EXISTS `user_auth`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user_auth` (
+  `ua_id` int(11) NOT NULL AUTO_INCREMENT,
+  `ua_user` varchar(32) DEFAULT NULL,
+  `ua_pwd` varchar(32) DEFAULT NULL,
+  PRIMARY KEY (`ua_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_auth`
+--
+
+LOCK TABLES `user_auth` WRITE;
+/*!40000 ALTER TABLE `user_auth` DISABLE KEYS */;
+INSERT INTO `user_auth` VALUES (29,'zero','e10adc3949ba59abbe56e057f20f883e'),(30,'admin','e10adc3949ba59abbe56e057f20f883e'),(31,'root','f379eaf3c831b04de153469d1bec345e'),(32,'test','e10adc3949ba59abbe56e057f20f883e'),(33,'demo','e10adc3949ba59abbe56e057f20f883e'),(34,'ceshi','e10adc3949ba59abbe56e057f20f883e'),(35,'ze','e10adc3949ba59abbe56e057f20f883e'),(36,'z','e10adc3949ba59abbe56e057f20f883e'),(37,'qwertt','d8578edf8458ce06fbc5bb76a58c5ca4'),(38,'qqqqqq','a127fd1f86e4ab650f2216f09992afa4'),(39,'ie','e10adc3949ba59abbe56e057f20f883e'),(40,'adminx','e10adc3949ba59abbe56e057f20f883e'),(41,'ygtq','e10adc3949ba59abbe56e057f20f883e');
+/*!40000 ALTER TABLE `user_auth` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user_info`
+--
+
+DROP TABLE IF EXISTS `user_info`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user_info` (
+  `ui_id` int(11) NOT NULL AUTO_INCREMENT,
+  `ua_user` varchar(32) DEFAULT NULL,
+  `ui_nickname` varchar(48) DEFAULT NULL,
+  `ui_avatar` varchar(128) DEFAULT NULL,
+  `ui_reg_time` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ui_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_info`
+--
+
+LOCK TABLES `user_info` WRITE;
+/*!40000 ALTER TABLE `user_info` DISABLE KEYS */;
+INSERT INTO `user_info` VALUES (29,'zero','超级用户','/src/images/avatar.jpg',1507476396),(30,'admin','超级管理员','/src/images/avatar.jpg',1507476697),(31,'root','linux','/src/images/avatar.jpg',1507476766),(32,'test','测试','/src/images/avatar.jpg',1507711514),(33,'demo','demo','/src/images/avatar.jpg',1507711736),(34,'ceshi','','/src/images/avatar.jpg',1507811854),(35,'ze','z','/src/images/avatar.jpg',1507868096),(36,'z','z','/src/images/avatar.jpg',1507868244),(37,'qwertt','qwerty','/src/images/avatar.jpg',1507961927),(38,'qqqqqq','qqqqqq','/src/images/avatar.jpg',1507963053),(39,'ie','ie浏览器','/src/images/avatar.jpg',1507967919),(40,'adminx','','/src/images/avatar.jpg',1507968175),(41,'ygtq','雨过天晴','/src/images/avatar.jpg',1509082259);
+/*!40000 ALTER TABLE `user_info` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user_online`
+--
+
+DROP TABLE IF EXISTS `user_online`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user_online` (
+  `uo_id` int(11) NOT NULL AUTO_INCREMENT,
+  `uo_cid` varchar(32) DEFAULT NULL,
+  `uo_last_time` int(11) DEFAULT '0',
+  PRIMARY KEY (`uo_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_online`
+--
+
+LOCK TABLES `user_online` WRITE;
+/*!40000 ALTER TABLE `user_online` DISABLE KEYS */;
+INSERT INTO `user_online` VALUES (1,'e127c45941b347b5300987545b64bd34',1508997408),(2,'360c889ad1ba93a563d492396875d570',1509004572),(3,'b17c6cbdfef32e4334a03fd442b633d1',1509000411),(4,'f333eabbe56a9c5abb0fa45a12cea937',1508999923),(5,'21b86d5d3b42d8df67d9115578fd94ad',1508999808),(6,'c41a1a40470920ed6263f8dc2fa4ac29',1509000509),(7,'871687da5e843c3064d706b9ec36ffdb',1509004567),(8,'d62d14346518f26796548d4fa32a1678',1509006205),(9,'1e1731165d8b37eab8e1873dfefee381',1509006412),(10,'ebe4309b8428fe19d176c427921b9d60',1509006404),(11,'3adba80ab78b9870fcdb6dc47e2388fc',1509006596),(12,'2ef53b34c0d950cb1a38c151a2e15387',1509006601),(13,'5401903e32263ad7b1480f9ae2ec25aa',1509006604),(14,'3105be33b02b033ea43bc3d47afa1215',1509006632),(15,'b7c29935cbf98c65e3cfe3d0b236033d',1509006690),(16,'a371ac83ed6707e8b99db532f2aabef0',1509006957),(17,'a16fa01d1478bd2362ca47031940b691',1509007151),(18,'876f11078bb87fe5d2240848f6ad9cf2',1509007405),(19,'4893efa932eca42447a8a60224ae1624',1509007397),(20,'7266b6003fdeee9a7cc092772adac5cb',1509012428),(21,'8cada7563482cdc09f548ea1c152440c',1509011945),(22,'c84e1836802dbb5cf29f843d3a30732f',1509011955),(23,'8882fb70ad884351e5b62dfaed3c273d',1509011965),(24,'b27fe0f993e104bb8b74d52478c13a4d',1509011975),(25,'4dc69ade11f8b4a1e9b24d55352fae68',1509011985),(26,'ec5819eb843f191946f1aca1ba7570fb',1509011995),(27,'439248f017ef586e1019cdd42c42c818',1509012005),(28,'b3c6d53211be5d82fe1434fd8687d487',1509032068),(29,'5ba2b97860955cd7524c219501536956',1509089655),(30,'024dc8ca1453c40ddd64a8016483c7a2',1509099460),(31,'be8fd7b8032b2a779199ad4ff313be0b',1509113730);
+/*!40000 ALTER TABLE `user_online` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2017-10-27 22:16:38

@@ -1,0 +1,1 @@
+<p style="white-space: normal;">确定PDO扩展启用了吗？</p><p style="white-space: normal;">如果没有，将PHP配置文件php.ini中的 extension=pdo.dll 和 extension=pdo_mysql 前面的 ; 号去了，重启下 Apache 服务器再试试。</p><p><br/></p>

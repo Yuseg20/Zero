@@ -5,14 +5,17 @@
     $indexTarget = $this -> get('index-target');
     $logout = $this -> get('logout');
     $logined = $this -> get('logined');
+    $keyword = $this -> get('keyword');
 ?>
 
 <script type="text/javascript">
 <!--	
 	$(window).load(function(){
+		pcs.aSearch();//搜索
+		
 		window.setInterval(function(){
 			pcs.onlines();
-		},10000);
+		},6000);
 	});
 //-->
 </script>
@@ -30,14 +33,15 @@
         <!-- 搜索 -->
         <div class="search-container">
             <form onSubmit="return false;">
-                <input type="text" placeholder="搜索关键字" />
-                <button></button>
+                <input id="txt-search" type="text" placeholder="搜索关键字" value="<?php echo $keyword; ?>" />
+                <button id="btn-search"></button>
             </form>
         </div>
         <!-- 用户状态 -->
         <div class="user-status-container">
             <!-- 未登录 -->
             <div id="logout" class="logout" style="display:<?php echo $logout; ?>;">
+            	<a href="<?php echo $webDName.$webRoot; ?>" target="<?php echo $indexTarget; ?>"  class="a-link index">首页</a>
                 <a id="a-login-menu" href="">登录</a>
                 <a id="a-reg-menu" href="">注册</a>
             </div>
@@ -45,7 +49,7 @@
             <!-- 已登录 -->
             <div id="logined" class="logined" style="display:<?php echo $logined; ?>;">
 	            <a href="<?php echo $webDName.$webRoot; ?>" target="<?php echo $indexTarget; ?>"  class="a-link index">首页</a>
-                <a href="" class="a-link notice">&nbsp;</a>
+                <!--<a href="" class="a-link notice">&nbsp;</a>-->
                 <a href="<?php echo $webDName.$webRoot; ?>?q=zero/person/index" class="person a-link">&nbsp;</a>
                 <a href="" class="a-link logout">&nbsp;</a>
             </div>

@@ -82,7 +82,7 @@
 
 			//查询部分用户提问列表
 			$sql = "SELECT user_ask.uq_id as 'askId', user_ask.uq_title as 'title'
-					FROM user_ask,user_answer
+					FROM user_ask
 					WHERE user_ask.uq_id NOT IN(
 						SELECT user_answer.uq_id
 						FROM user_answer
@@ -201,6 +201,75 @@
 
 			//更新
 			$pdo -> execute($sql);
+		}
+
+		//获取随机问题
+		public function getRandAsk(){
+			//创建数据库对象
+			$pdo = new MiniPDO();
+
+			$sql = "SELECT uq_id as 'aid', uq_title as 'title'
+					FROM user_ask
+					WHERE uq_id >= ((
+						SELECT MAX(uq_id)
+					    FROM user_ask)-(
+							SELECT MIN(uq_id)
+					        FROM user_ask)) * RAND() + (
+								SELECT MIN(uq_id)
+					            FROM user_ask)
+					LIMIT 0,20;";
+
+			$rs = $pdo -> query($sql);
+
+			return $rs;
+		}
+
+		//搜索页数
+		public function getSearchPages($keyword = ''){
+			if(empty($keyword)) return;
+
+			//SQL敏感字符转义
+			$keyword = addcslashes($keyword, '\'"&|@%*()--');
+			
+			//创建数据库对象
+			$pdo = new MiniPDO();
+
+			$sql = "SELECT uq_id as 'aid', uq_title as 'title', uq_desc as 'adesc', uq_publish_time as 'pubtime'
+					FROM user_ask
+					WHERE uq_title like '%{$keyword}%' or uq_desc like '%{$keyword}%'
+					ORDER BY uq_publish_time DESC";
+
+			$rs = $pdo -> query($sql);
+
+			//返回结果
+			return count($rs);
+		}
+
+		//搜索
+		public function getSearch($keyword = '', $index = 0, $length = 0){
+			if(empty($keyword)) return;
+
+			//SQL敏感字符转义
+			$keyword = addcslashes($keyword, '\'"&|@%*()--');
+			
+			//创建数据库对象
+			$pdo = new MiniPDO();
+
+			$sql = "SELECT uq_id as 'aid', uq_title as 'title', uq_desc as 'adesc', uq_publish_time as 'pubtime'
+					FROM user_ask
+					WHERE uq_title like '%{$keyword}%' or uq_desc like '%{$keyword}%'
+					ORDER BY uq_publish_time DESC
+					LIMIT {$index},{$length}";
+
+			$rs = $pdo -> query($sql);
+
+			//时间格式转换
+			for($i=0;$i<count($rs);$i++){
+				$rs[$i]['pubtime'] = date('Y-m-d', $rs[$i]['pubtime']);
+			}
+
+			//返回结果
+			return $rs;
 		}
 	}
 ?>

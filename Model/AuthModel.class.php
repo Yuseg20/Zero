@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 	/* 认证模型 */
 	class AuthModel{
 

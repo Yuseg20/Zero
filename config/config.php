@@ -19,7 +19,7 @@ return array(
 	"system" =>array(
 		"timezone" => "PRC",//时区设置,PRC（中华人民共和国）
 		"xtime"    => 0, //脚本执行时间
-		"otime"    => 5 //在线生命更新周期（秒）
+		"otime"    => 8 //在线生命更新周期（秒）
 	),
 
 	/* MySQL 数据库配置 */

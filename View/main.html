@@ -5,6 +5,8 @@
     $newestAskList = $this ->get('newestAskList');
     $newestAnswerList = $this -> get('newestAnswerList');
     $goodList = $this -> get('good-list');
+    $randAskList = $this -> get('rand-ask-list');
+    $hotAskList = $this -> get('hot-ask-list');
 ?>
 
 <!doctype html>
@@ -35,6 +37,8 @@
 		pcs.authRegister();//注册
 		pcs.authLogin();//登录
 		pcs.logout();//注销
+		pcs.randChange();//随机切换问答
+		pcs.indexAsk();//我要提问
 		
 		//添加统计器
 		counter = yui.counter('#num-clock',{
@@ -96,7 +100,7 @@
             <div class="left">
             	<div class="left-1">
                 	<div class="l">
-                    	<h3 class="title">最新问题&nbsp;<a class="more-flag" href="" title="更多">»</a></h3>
+                    	<h3 class="title">最新问题&nbsp;<a class="more-flag" href="" title="更多"><!--»--></a></h3>
                         <ul>
                         	<?php for($i=0;$i<count($newestAskList);$i++){ ?>
                             <li>
@@ -109,7 +113,7 @@
                         </ul>
                     </div>
                 	<div class="r">
-                    	<h3 class="title">最新解决&nbsp;<a class="more-flag" href="" title="更多">»</a></h3>
+                    	<h3 class="title">最新解决&nbsp;<a class="more-flag" href="" title="更多"><!--»--></a></h3>
                         <ul>
                         	<?php for($i=0;$i<count($newestAnswerList);$i++){ ?>
                             <li>
@@ -125,30 +129,16 @@
             	<div class="left-2">
                 	<div class="title-bar">
                 		<h3 class="title">随机问答</h3>
-                        <span><a href="">更换</a></span>
+                        <span><a href="javascript:void(0);" id="rand-change">更换</a></span>
                     </div>
-                    <ul>
-                        <li><a href="">Java</a></li>
-                        <li><a href="">Android</a></li>
-                        <li><a href="">Node.js</a></li>
-                        <li><a href="">人工智能</a></li>
-                        <li><a href="">Redis</a></li>
-                        <li><a href="">CSS3</a></li>
-                        <li><a href="">Extjs</a></li>
-                        <li><a href="">ThinkPHP</a></li>
-                        <li><a href="">Yii</a></li>
-                        <li><a href="">二次开发</a></li>
-                        <li><a href="">CMS</a></li>
-                        <li><a href="">Java</a></li>
-                        <li><a href="">Android</a></li>
-                        <li><a href="">MySQL</a></li>
-                        <li><a href="">Node.js</a></li>
-                        <li><a href="">人工智能</a></li>
-                        <li><a href="">Redis</a></li>
-                        <li><a href="">MySQL</a></li>
-                        <li><a href="">HTML5</a></li>
-                        <li><a href="">ThinkPHP</a></li>
-                        
+                    <ul id="rand-ask-list">
+                    	<?php for($i=0;$i<count($randAskList);$i++){ ?>
+                        <li>
+                        	<a href="?q=zero/article/article&aid=<?php echo $randAskList[$i]['aid']; ?>" target="_blank">
+                        	<?php echo $randAskList[$i]['title']; ?>
+                            </a>
+                        </li>
+                        <?php } ?>
                     </ul>
                 </div>
             </div>
@@ -157,14 +147,16 @@
             <div class="right">
             	<!-- 公告栏容器 -->
             	<div class="notice-container">
-                	<h3 class="title">最新公告</h3>
+                	<h3 class="title">热题推荐</h3>
                     <ul>
-                        <li><a href="">Zero 简介</a><span class="pub-time">2017-9-26 22:04</span></li>
-                        <li><a href="">给新伙伴的一封信</a><span class="pub-time">2017-9-26 22:04</span></li>
-                        <li><a href="">Zero 简介</a><span class="pub-time">2017-9-26 22:04</span></li>
-                        <li><a href="">给新伙伴的一封信</a><span class="pub-time">2017-9-26 22:04</span></li>
-                        <li><a href="">Zero 简介</a><span class="pub-time">2017-9-26 22:04</span></li>
-                        <li><a href="">给新伙伴的一封信</a><span class="pub-time">2017-9-26 22:04</span></li>
+                    	<?php for($i=0;$i<count($hotAskList);$i++){ ?>
+                        <li>
+                        	<a href="?q=zero/article/article&aid=<?php echo $hotAskList[$i]['aid']; ?>">
+                        	<?php echo $hotAskList[$i]['title']; ?>
+                        	</a>
+                            <span class="pub-time"><?php echo $hotAskList[$i]['answers']; ?>&nbsp;回答</span>
+                        </li>
+                        <?php } ?>
                     </ul>
                 </div>
                 

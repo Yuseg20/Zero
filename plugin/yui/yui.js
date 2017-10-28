@@ -350,7 +350,7 @@ function YUI(pluginRoot){
 		function prevPage(){
 			if(currentPage > 1) currentPage--;//当前页码
 			if(currentPage > 2) pageNumStart = currentPage-2; else pageNumStart = 0;//循环页码起始
-				
+			
 			if(currentPage == 1){
 				//当前页为首页
 				index = 0;
@@ -384,6 +384,12 @@ function YUI(pluginRoot){
 			index = params.currentIndex;//当前页索引
 			pageNumStart = pagesize <= 3 ? 0 : currentPage-2;//循环页码起始
 			
+			if(pagesize > 3){
+				if(pageNumStart < 0) pageNumStart = 0;
+				if(currentPage >= pagesize) pageNumStart = pagesize-3;
+				if(currentPage > 1 && currentPage < pagesize) index = 1;
+			}
+			
 			for(var i=0;i<$liPages.length;i++){
 				pageNumStart++;
 				$liPages[i].text(pageNumStart);
@@ -395,7 +401,8 @@ function YUI(pluginRoot){
 					'background':'#FFF'
 				});
 			}
-			//切换预加载页码样式
+			
+			//切换加载页码样式
 			$liPages[index].css({
 				'color':'#FFF',
 				'border':'1px solid #009966',
@@ -410,6 +417,9 @@ function YUI(pluginRoot){
 			
 			if(currentPage == pagesize){
 				index = $liPages.length-1;//当前页为尾页
+				if(pagesize > 3){
+					pageNumStart--;
+				}
 			}else if(currentPage < pagesize){
 				//中间页
 				index = Math.floor($liPages.length/2);

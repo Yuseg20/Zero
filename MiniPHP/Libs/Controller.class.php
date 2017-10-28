@@ -80,7 +80,7 @@ abstract class Controller{
 
 	//获取数据
 	function get($name){
-		return $this -> data[$name];//返回数据
+		return !empty($this -> data[$name]) ? $this -> data[$name] : null;//返回数据
 	}
 
 	//设置 Json 值

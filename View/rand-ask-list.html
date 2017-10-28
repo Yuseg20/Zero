@@ -1,0 +1,12 @@
+<?php
+	//--- 获取渲染参数 ---
+    $randAskList = $this -> get('rand-ask-list');
+?>
+
+<?php for($i=0;$i<count($randAskList);$i++){ ?>
+<li>
+    <a href="?q=zero/article/article&aid=<?php echo $randAskList[$i]['aid']; ?>" target="_blank">
+    <?php echo $randAskList[$i]['title']; ?>
+    </a>
+</li>
+<?php } ?>

@@ -1,0 +1,20 @@
+<?php
+	//--- 获取渲染参数 ---
+    $sResult = $this -> get('s-result');
+?>
+
+<?php for($i=0;$i<count($sResult);$i++){ ?>
+<li>
+    <!-- 标题 -->
+    <a href="?q=zero/article/article&aid=<?php echo $sResult[$i]['aid']; ?>" target="_blank">
+        <span class="title"><?php echo $sResult[$i]['title']; ?></span>
+    </a>
+    <!-- 发布时间 -->
+    <span class="pub-date"><?php echo $sResult[$i]['pubtime']; ?></span>
+    <!-- 内容 -->
+    <div class="content-box">
+        <!-- 描述 -->
+        <span class="desc"><?php echo $sResult[$i]['adesc']; ?></span>
+    </div>
+</li>
+<?php } ?>

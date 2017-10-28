@@ -1,4 +1,4 @@
-﻿// JavaScript Document
+// JavaScript Document
 
 function Processor(){
 	
@@ -1337,6 +1337,239 @@ function Processor(){
 				}
 			},
 			error: function(jqXHR, status, error){
+			}
+		});
+	}
+	
+	//随机切换问答
+	this.randChange = function(){
+		var loadingDialog = null;
+		var messageDialog = null;
+		var isRequesting = false;
+		
+		$('#rand-change').click(function(e) {
+			if(isRequesting){
+				return;
+			}
+			
+			//移除上一个加载提示框
+			if(loadingDialog){
+				loadingDialog.remove();
+			}
+			
+			//移除上一个消息提示框
+			if(messageDialog){
+				messageDialog.remove();
+			}
+			
+			//显示新的加载提示框
+			loadingDialog = yui.loadingDialog('body');
+			
+			var sendData = {
+								"q":"zero/Index/getRandAsk"
+							};
+			isRequest = $.ajax({
+				url: webDName + webRoot +'/index.php',
+				type: 'POST',
+				data: sendData,
+				dataType: "json",
+				success: function(data, status){
+					//移除加载提示框
+					loadingDialog.hidden();
+					
+					if(data.status == 0){
+						//获取成功
+						$('#rand-ask-list').html(data.content);
+						//window.alert(data.content);
+					}else{
+						//获取失败
+						//显示消息提示框
+						messageDialog = yui.messageDialog('body',{
+							text: '获取数据失败'
+						});
+					}
+				},
+				error: function(jqXHR, status, error){
+					//用户终止上一个请求
+					if(status == 'abort'){
+						return;
+					}
+					
+					//移除加载提示框
+					loadingDialog.hidden();
+					
+					//显示消息提示框
+					messageDialog = yui.messageDialog('body',{
+						text: '请求出错'
+					});
+				}
+			});
+        });
+	}
+	
+	//我要提问
+	this.indexAsk = function(){
+		var loadingDialog = null;
+		var messageDialog = null;
+		var isRequesting = false;
+		
+		$('#btn-ask').click(function(e) {
+			if(isRequesting){
+				return;
+			}
+			
+			//移除上一个加载提示框
+			if(loadingDialog){
+				loadingDialog.remove();
+			}
+			
+			//移除上一个消息提示框
+			if(messageDialog){
+				messageDialog.remove();
+			}
+			
+			//显示新的加载提示框
+			loadingDialog = yui.loadingDialog('body');
+			
+			var sendData = {
+								"q":"zero/Index/wantAsk"
+							};
+			isRequest = $.ajax({
+				url: webDName + webRoot +'/index.php',
+				type: 'POST',
+				data: sendData,
+				dataType: "json",
+				success: function(data, status){
+					//移除加载提示框
+					loadingDialog.hidden();
+					
+					if(data.status == 0){
+						//已登录
+						window.location.href = webDName + webRoot +'?q=zero/person/index&target=ask';
+					}else{
+						//未登录
+						//显示消息提示框
+						messageDialog = yui.messageDialog('body',{
+							text: '请先登录'
+						});
+					}
+				},
+				error: function(jqXHR, status, error){
+					//用户终止上一个请求
+					if(status == 'abort'){
+						return;
+					}
+					
+					//移除加载提示框
+					loadingDialog.hidden();
+					
+					//显示消息提示框
+					messageDialog = yui.messageDialog('body',{
+						text: '请求出错'
+					});
+				}
+			});
+        });
+	}
+	
+	//搜索
+	this.aSearch = function(){
+		function sousuo(keyword){
+			window.location.href = webDName + webRoot +'?q=zero/index/search&keyword='+ keyword;
+		}
+		
+		$('#txt-search').keypress(function(e){
+			if(e.keyCode == 13){
+				sousuo($(this).val());
+			}
+		});
+		
+		$('#btn-search').click(function(e) {
+            sousuo($('#txt-search').val());
+        });
+	}
+	
+	//搜索结果分页
+	this.searchPaging = function(keyword){
+		var isRequest = null;
+		var loadingDialog = null;
+		var messageDialog = null;
+		
+		//分页显示
+		function pageShow(page){
+			//终止上一个请求
+			if(isRequest){
+				isRequest.abort();
+			}
+			
+			//移除上一个加载提示框
+			if(loadingDialog){
+				loadingDialog.remove();
+			}
+			
+			//移除上一个消息提示框
+			if(messageDialog){
+				messageDialog.remove();
+			}
+			
+			//显示新的加载提示框
+			loadingDialog = yui.loadingDialog('body');
+			
+            //Ajax请求搜索结果页面
+			var sendData = {
+								"q":"zero/Index/ajaxSearch",
+								"keyword":keyword,
+								"page":page
+							};
+			isRequest = $.ajax({
+				url: webDName + webRoot +'/index.php',
+				type: 'POST',
+				data: sendData,
+				dataType: "json",
+				success: function(data, status){
+					//移除加载提示框
+					loadingDialog.hidden();
+					
+					if(data.status == 0){
+						//获取成功,列表替换
+						$('#ul-s-result').html(data.content);
+					}else{
+						//获取失败
+						//显示消息提示框
+						messageDialog = yui.messageDialog('body',{
+							text: '加载失败'
+						});
+					}
+				},
+				error: function(jqXHR, status, error){
+					//用户终止上一个请求的错误
+					if(status == 'abort'){
+						return;
+					}
+					
+					//其他错误
+					//移除加载提示框
+					loadingDialog.hidden();
+					
+					//显示消息提示框
+					messageDialog = yui.messageDialog('body',{
+						text: '请求出错'
+					});
+				}
+			});
+		}
+		
+		//分页
+		yui.paging('#paging',{
+			pagesize:pagesize,
+			page:function(obj){
+				pageShow(obj.current);
+			},
+			prev:function(obj){
+				pageShow(obj.current);
+			},
+			next:function(obj){
+				pageShow(obj.current);
 			}
 		});
 	}
