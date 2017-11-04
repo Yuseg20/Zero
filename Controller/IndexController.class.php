@@ -20,7 +20,6 @@
 			}
 
 			//------设置渲染数据------
-			$this -> set('online', '666');
 			$this -> set('webDName', $webConfig -> getDName());//设置域名
 			$this -> set('webRoot', $webConfig -> getRoot());//设置根目录
 			$this -> set('webIntro', $webConfig -> getIntro());//设置介绍标语
@@ -50,7 +49,7 @@
 
 			//------业务处理------
 			$cookie = new Cookie();
-			$auth = new AuthModel();
+			$online = new OnlineModel();
 			$cid = $cookie -> getVal('cid');
 
 			if($cid === null){
@@ -59,18 +58,10 @@
 				$cid = md5(time().rand(0, 1000));
 				//存储客户端身份令牌
 				$cookie -> setVal('cid', $cid);
-				//写入客户端身份令牌
-				$auth -> insertOnlineLife($cid);
-			}else{
-				//---客户端身份认证已存在---
-				//更新客户端身份令牌
-				$auth -> updateOnlineLife($cid);
 			}
 
 			//获取在线人数
-			$onlines = $auth -> getOnlines();
-
-			if($onlines === false) $status = -1; else $onlines = $onlines['onlines'];
+			$onlines = $online -> getOnlines($cid);
 
 			//------设置响应数据------
 			$this -> setJson('status', $status);

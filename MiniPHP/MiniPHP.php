@@ -113,7 +113,8 @@ function __autoload($className){
 		'Cookie',
 		'Session',
 		'Error',
-		'MiniPDO'
+		'MiniPDO',
+		'MRedis'
 	);
 	if(in_array($className, $pLibs)){
 		//加载框架公共类文件

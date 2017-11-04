@@ -93,7 +93,8 @@
 			//------业务处理------
 			if(isset($_SESSION['logined_user'])){
 				//清除登录状态
-				unset($_SESSION['logined_user']);
+				session_destroy();
+				//unset($_SESSION['logined_user']);
 			}
 
 			//------设置响应数据------

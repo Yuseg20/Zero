@@ -34,7 +34,7 @@ return array(
 
 	/* Session 配置 */
 	"session" => array(
-		"display"	  => "on",	//自定义 Session 开关
+		"mode"		  => "redis",  //会话存储模式
 		"save_path"	  => APP_PATH."Session",	//Session 保存地址
 		"maxlifetime" => 1440,		//最大生命周期 s
 		"probability" => 1,		//回收概率分子
@@ -43,7 +43,7 @@ return array(
 
 	/* Redis 配置 */
 	"redis" => array(
-		"display"	=> "off",		//开关
 		"host"		=> "127.0.0.1",	// Redis 服务器地址
+		"port"		=> 6379 // 端口
 	)
 );
